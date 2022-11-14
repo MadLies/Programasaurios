@@ -22,6 +22,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Register from './src/components/Register';
+import Forget from './src/components/Forget';
+import Menu from './src/components/Menu';
 
 const App=  () => {
   const [modalLogin, setModalLogin] = useState(false);
@@ -108,12 +110,32 @@ const App=  () => {
     </View>
 
     <Modal
+      visible={modalLogin}
+      animationType='fade'
+      >
+        <Menu
+          modalLogin={modalLogin}
+          setModalLogin={setModalLogin}
+        />
+    </Modal>
+
+    <Modal
       visible={modalRegister}
       animationType='slide'
     >
       <Register
         modalRegister={modalRegister}
         setModalRegister={setModalRegister}
+      />
+    </Modal>
+
+    <Modal
+      visible={modalForget}
+      animationType='slide'
+    >
+      <Forget
+        modalForget={modalForget}
+        setModalForget={setModalForget} 
       />
     </Modal>
 
@@ -130,7 +152,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    //gris oscuro hex: #1E1E1E
   },
   image: {
     width: '100%',
@@ -148,6 +169,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: '#000',
     borderWidth: 1,
+    
     
   },
   text: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Modal, ScrollView, Pressable , StyleSheet , TextInput, Image} from 'react-native'
+import { View, Text, Modal, ScrollView, Pressable , StyleSheet , TextInput, Image, Alert} from 'react-native'
 
 const Register = ({
 modalRegister,
@@ -8,7 +8,9 @@ setModalRegister,
 ) => {
 
   const [name, setName] = React.useState('');
-  const[phone, setPhone] = React.useState('');
+  const [nickname, setNickname] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [phone, setPhone] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [password2, setPassword2] = React.useState('');
@@ -17,8 +19,28 @@ setModalRegister,
 
 
    const handleRegister = () => { 
-      setModalRegister(false);
+     if( [name, nickname, country, phone, email, password, password2].includes('')){
+       Alert.alert(
+           'Error', 
+          'Todos los campos son obligatorios',
+          [,{Text: 'OK'}]
+           );
+          return
+
+      }else if(password !== password2){
+        Alert.alert(
+          'Las contraseñas no coinciden',
+          'Verifica que las contraseñas sean iguales',
+          [{Text: 'OK'}]
+          );
+          return
     }
+    else{
+      //aqui van muchas cosas de bases de datos
+      setModalRegister(false);
+        return
+    }
+  }
 
   return (
     
@@ -56,6 +78,9 @@ setModalRegister,
                 keyboardType='default'
                 placeholder='Nombre'
                 placeholderTextColor={'#666'}
+                value={name}
+                onChangeText={setName}
+                
               />
           </View>
 
@@ -66,6 +91,10 @@ setModalRegister,
                 keyboardType='default'
                 placeholder='Username'
                 placeholderTextColor={'#666'}
+                value={nickname}
+                onChangeText={setNickname}
+
+
               />
           </View>
 
@@ -78,6 +107,8 @@ setModalRegister,
                 keyboardType='default'
                 placeholder='Ciudad'
                 placeholderTextColor={'#666'}
+                value={country}
+                onChangeText={setCountry}
               
               />
           </View>
@@ -89,7 +120,9 @@ setModalRegister,
                 keyboardType='email-address'
                 placeholder='Email del propietario'
                 placeholderTextColor={'#666'}
-      
+                value={email}
+                onChangeText={setEmail}
+
               />
           </View>
 
@@ -100,6 +133,8 @@ setModalRegister,
                 keyboardType='number-pad'
                 placeholder='Telefono'
                 placeholderTextColor={'#666'}
+                value={phone}
+                onChangeText={setPhone}
                 maxLength={10}
               />
           </View>
@@ -107,21 +142,30 @@ setModalRegister,
           <View style={styles.form}>
               <Text style={styles.label}>Contraseña</Text>
               <TextInput
+ 
                 style={styles.input}
-                keyboardType='Password'
-                placeholder='Contraseña'
-                placeholderTextColor={'#666'}
+                placeholder='Ingresa tu password'
+                placeholderTextColor="#666"
+                returnKeyType='go'
+                secureTextEntry
+                autoCorrect={false}
+                value={password}
+                onChangeText={setPassword}
               />
           </View>
 
           <View style={styles.form}>
               <Text style={styles.label}>Confirma tu contraseña</Text>
               <TextInput
-                style={styles.input}
-                keyboardType='Password'
-                placeholder='Confirma tu contraseña'
-                placeholderTextColor={'#666'}
                 
+               style={styles.input}
+               placeholder='Confirma tu password'
+               placeholderTextColor="#666"
+               returnKeyType='go'
+               secureTextEntry
+               autoCorrect={false}
+                value={password2}
+                onChangeText={setPassword2}
               />
           </View>
         
@@ -216,6 +260,7 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     backgroundColor: '#fff',
+    color: '#666',
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 5,
