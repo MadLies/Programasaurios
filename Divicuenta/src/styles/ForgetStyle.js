@@ -26,7 +26,7 @@ const forgetStyle = StyleSheet.create({
        
         marginVertical: 30,
         
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
 
     },
     title: {

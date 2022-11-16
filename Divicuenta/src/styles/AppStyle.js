@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet} from "react-native";
 
 const appStyle = StyleSheet.create({
     container: {
@@ -6,15 +6,17 @@ const appStyle = StyleSheet.create({
         backgroundColor: '#fff',
     },
     image: {
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        zIndex: -1,
+        //width: '100%',
+        //height: '100%',
+        //position: 'absolute',
+        //zIndex: -1,
+        flex: 1,
+        justifyContent: "center"
     },
     box1: {
 
         backgroundColor: '#A6D1E6',
-        marginTop: 70,
+        marginTop: 10,
         padding: 20,
         marginHorizontal: 20,
         borderRadius: 10,

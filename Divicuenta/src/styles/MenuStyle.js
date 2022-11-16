@@ -3,15 +3,12 @@ const menuStyle = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-
-
+        backgroundColor: '#fff'
     },
     imageBack: {
         width: '100%',
         height: '100%',
         position: 'absolute',
-        zIndex: -2,
     },
 
     header: {
@@ -29,7 +26,6 @@ const menuStyle = StyleSheet.create({
         backgroundColor: '#A6D1E6',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 20,
         padding: 10,
         borderRadius: 15,
         borderColor: '#ccc',
@@ -65,57 +61,44 @@ const menuStyle = StyleSheet.create({
 
     button: {
         flexDirection: 'row',
+        flexWrap: "wrap",
         alignItems: 'center',
-        width: '45%',
-        height: 50,
+        justifyContent: "center",
         borderColor: '#ccc',
         borderWidth: 1,
         borderRadius: 15,
-        marginVertical: 20,
         paddingHorizontal: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.32,
-        shadowRadius: 5.46,
-
+        marginVertical: "3%",
         elevation: 9,
+        width: "70%",
+        height: "10%",
     },
 
     btnDiv: {
         backgroundColor: '#8D72E1',
-        marginLeft: 50,
-
     },
 
     btnFriend: {
         backgroundColor: '#1363DF',
-        marginLeft: 100,
     },
 
     btnNoti: {
         backgroundColor: '#66DE93',
-        marginLeft: 150,
     },
 
     btnDeu: {
         backgroundColor: '#FBDF07',
-        marginLeft: 50,
     },
 
     btnSet: {
         backgroundColor: '#FF9551',
-        marginLeft: 100,
     },
 
     textButton: {
         fontSize: 18,
         color: '#fff',
-        fontWeight: 'bold',
-        marginLeft: 10,
     },
+
 
     image: {
         width: 40,
@@ -123,12 +106,10 @@ const menuStyle = StyleSheet.create({
     },
 
     imageDino: {
-        width: 90,
-        height: 130,
-        position: 'absolute',
-        bottom: 20,
-        left: 30,
-        zIndex: 2,
+        width: "100%",
+        height: "16%",
+        resizeMode: 'repeat', 
+        justifyContent: "flex-end",
     },
 
 })
