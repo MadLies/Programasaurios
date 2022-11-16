@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, Modal, ScrollView, Pressable , StyleSheet , TextInput, Image, Alert} from 'react-native'
+import { registerStyle as styles } from '../styles/RegisterStyle';
 
 const Register = ({
 modalRegister,
@@ -19,7 +20,7 @@ setModalRegister,
 
 
    const handleRegister = () => { 
-     if( [name, nickname, country, phone, email, password, password2].includes('')){
+     if( [name, nickname, country, phone, email, password, password2].some((value)=>value == '')){
        Alert.alert(
            'Error', 
           'Todos los campos son obligatorios',
@@ -130,12 +131,12 @@ setModalRegister,
               <Text style={styles.label}>Telefono</Text>
               <TextInput
                 style={styles.input}
-                keyboardType='number-pad'
+                keyboardType='phone-pad'
                 placeholder='Telefono'
                 placeholderTextColor={'#666'}
                 value={phone}
                 onChangeText={setPhone}
-                maxLength={10}
+                maxLength={15}
               />
           </View>
 
@@ -191,106 +192,5 @@ setModalRegister,
 
   )
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: 50,
-    backgroundColor: '#A6D1E6',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    borderRadius: 5,
-    marginVertical: 30,
-    paddingHorizontal: 20,
-  },
-  line: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-  
-  },
-
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  close: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    
-
-  },
-
-  image: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    zIndex: -1, 
-  },
-  
-
-  form: {
-    width: '100%',
-    borderRadius: 10,
-    marginTop: 20,
-    backgroundColor: '#8D72E1'
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#FFF',
-    paddingHorizontal: 20,
-    paddingVertical: 5,
-    marginBottom: 5,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    paddingHorizontal: 10,
-    backgroundColor: '#fff',
-    color: '#666',
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-  },
-  btnSubmit: {
-    width: '100%',
-    height: 40,
-    backgroundColor: '#8D72E1',
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 50,
-  },
-  btnSubmitText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
-
-  },
-
-  image2: {
-    width: '300',
-    height: '300',
-
-
-
-}
-});
-
-
 
 export default Register
