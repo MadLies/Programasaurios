@@ -19,7 +19,7 @@ setModalRegister,
 
 
    const handleRegister = () => { 
-     if( [name, nickname, country, phone, email, password, password2].includes('')){
+     if( [name, nickname, country, phone, email, password, password2].some((value)=>value == '')){
        Alert.alert(
            'Error', 
           'Todos los campos son obligatorios',
@@ -130,12 +130,12 @@ setModalRegister,
               <Text style={styles.label}>Telefono</Text>
               <TextInput
                 style={styles.input}
-                keyboardType='number-pad'
+                keyboardType='phone-pad'
                 placeholder='Telefono'
                 placeholderTextColor={'#666'}
                 value={phone}
                 onChangeText={setPhone}
-                maxLength={10}
+                maxLength={15}
               />
           </View>
 

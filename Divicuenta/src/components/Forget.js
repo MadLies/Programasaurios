@@ -11,7 +11,7 @@ setModalForget,
     const [email, setEmail] = React.useState('');
 
     const handleEmail = () => {
-        if (email.includes('')){
+        if (email==''){
            Alert.alert(
             'Error',
             'Por favor ingresa un correo valido',
