@@ -51,7 +51,7 @@ const NewBillStyle = StyleSheet.create({
         alignContent: 'center',
         marginHorizontal: 30,
         marginTop: 30,
-        backgroundColor: '#BCCEF8',
+        backgroundColor: '#A7EF69',
         borderRadius: 10,
         padding: 20,
         

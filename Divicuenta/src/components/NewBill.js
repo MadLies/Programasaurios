@@ -6,17 +6,52 @@ import { Picker } from '@react-native-picker/picker'
 import DatePicker from 'react-native-date-picker'
 //import DateTimePicker from '@react-native-community/datetimepicker';
 
-const NewBill = ({ newBill }) => {
+const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
 
-    const [fecha, setFecha] = useState(new Date())
-    const saveAlert = () => {
+    const [name, setName] = useState('')
+    const [date, setDate] = useState(new Date())
+    const [total, setTotal] = useState('')
+    const [currency, setCurrency] = useState('')
+    const [participants, setParticipants] = useState('')
+
+
+    const handleNewBill = () => {
+        if ([name, date, total, currency, participants].some((value) => value == '')) {
+            Alert.alert(
+                'Error',
+                'Todos los campos son obligatorios',
+                [, { Text: 'OK' }]
+            );
+            return
+        } 
+
         Alert.alert(
             "¿Estas seguro de guardar los cambios?",
             "Los cambios se guardaran en la base de datos y no se podran recuperar",
             [{ text: "Cancelar", style: "cancel" },
-            { text: "Aceptar", onPress: () => setNewBill(false) }],
+            { text: "Aceptar", onPress: () => {
+                const nBill = {
+                    name,
+                    date,
+                    total,
+                    currency,
+                    participants
+                }
+        
+                setBill([...bill, nBill])
+                setNewBill(false)
+                setName('')
+                setDate(new Date())
+                setTotal('')
+                setCurrency('')
+                setParticipants('')
+            } }],
         );
+        
     }
+
+
+
 
     const exitAlert = () => {
         Alert.alert(
@@ -31,13 +66,15 @@ const NewBill = ({ newBill }) => {
         <Modal
             animationType='slide'
             visible={newBill}
+            onRequestClose={() => {
+                setNewBill(false);
+            }}
         >
             <View style={NewBillStyle.container}>
                 <Image style={NewBillStyle.imageBack} source={require('../img/Configuration.png')} />
                 <View style={NewBillStyle.header}>
                     <Text style={NewBillStyle.title} >Nueva Cuenta</Text>
-                    <Pressable style={NewBillStyle.close} //>onPress={() => exitAlert()}
-                    >
+                    <Pressable style={NewBillStyle.close} onPress={() => exitAlert()}>
                         <Image style={NewBillStyle.close} source={require('../img/exit.png')} />
                     </Pressable>
                 </View>
@@ -51,19 +88,21 @@ const NewBill = ({ newBill }) => {
                             style={NewBillStyle.input}
                             placeholder='Asigna un nombre identificativo'
                             placeholderTextColor={'#000'}
+                            onChangeText={setName}
+                            value={name}
                         //value={name}
                         //onChangeText={(text) => setName(text)}
-                        //cuando la perra de manuel implemente la hpta base de datos, aqui se debe de poner el nombre del usuario
+                        //cuando la perra de manuel implemente la hpta base de datos, aqui se debe de poner el name del usuario
                         />
 
                         <Text style={NewBillStyle.label}>Fecha</Text>
                         <DatePicker
-                            date={fecha}
+                            date={date}
                             locale='es'
-                            mode = 'date'
+                            mode='date'
                             androidVariant="nativeAndroid"
-                            onDateChange={(date)=>setFecha(date)}
-                            
+                            onDateChange={(date) => setDate(date)}
+
                         />
 
 
@@ -74,6 +113,8 @@ const NewBill = ({ newBill }) => {
                             placeholder='$$$'
                             placeholderTextColor={'#000'}
                             keyboardType='phone-pad'
+                            onChangeText={setTotal}
+                            value={total}
 
                         //value={number}
                         //onChangeText={(text) => setNumber(text)}
@@ -85,6 +126,10 @@ const NewBill = ({ newBill }) => {
                             <Picker
                                 style={NewBillStyle.pick}
                                 dropdownIconColor={'#000'}
+                                selectedValue={currency}
+                                onValueChange={setCurrency}
+
+
                             >
                                 <Picker.Item label="--Seleccione--" value="" />
                                 <Picker.Item label="MXN" value="MXN" />
@@ -108,6 +153,8 @@ const NewBill = ({ newBill }) => {
                             placeholderTextColor={'#000'}
                             multiline={true}
                             numberOfLines={4}
+                            onChangeText={setParticipants}
+                            value={participants}
 
                         //value={number}
                         //onChangeText={(text) => setNumber(text)}
@@ -118,7 +165,7 @@ const NewBill = ({ newBill }) => {
 
                     <Pressable
                         style={NewBillStyle.submit}
-                        //onPress={saveAlert}
+                        onPress={handleNewBill}
                     >
                         <Text style={NewBillStyle.submitText}>Aceptar</Text>
                     </Pressable>

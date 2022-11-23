@@ -13,6 +13,7 @@ const Menu = ({
     const [closeSession, setCloseSession] = React.useState(false);
     const [newBill, setNewBill] = useState(false);
     const [configuration, setConfiguration] = React.useState(false);
+    const [bill, setBill] = useState([])
 
     const handleLogin = () => {
         Alert.alert(
@@ -136,6 +137,9 @@ const Menu = ({
 
             <NewBill
                 newBill = {newBill}
+                bill = {bill}
+                setBill = {setBill}
+                setNewBill = {setNewBill}
             />
 
 
