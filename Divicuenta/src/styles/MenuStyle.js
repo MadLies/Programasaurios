@@ -16,9 +16,8 @@ const menuStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
-        marginVertical: 40,
+        marginTop: 30,
         paddingHorizontal: 20,
-
     },
 
     line: {
@@ -60,7 +59,7 @@ const menuStyle = StyleSheet.create({
     },
 
     button: {
-        flexDirection: 'row',
+        flexDirection: 'row',   
         flexWrap: "wrap",
         alignItems: 'center',
         justifyContent: "center",
@@ -94,7 +93,13 @@ const menuStyle = StyleSheet.create({
         backgroundColor: '#FF9551',
     },
 
+    btnStats: {
+        backgroundColor: '#FF5E5E',
+    },
+
     textButton: {
+        marginLeft: 15,
+        marginTop: 30,
         fontSize: 18,
         color: '#fff',
     },
@@ -103,13 +108,17 @@ const menuStyle = StyleSheet.create({
     image: {
         width: 40,
         height: 40,
+
     },
 
     imageDino: {
         width: "100%",
         height: "16%",
+        position: 'absolute',
+        zIndex: 2,
         resizeMode: 'repeat', 
         justifyContent: "flex-end",
+        bottom: 0,
     },
 
 })

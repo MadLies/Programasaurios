@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, Modal, ScrollView, Pressable, StyleSheet, TextInput, Image, Alert } from 'react-native'
 import { menuStyle as styles } from '../styles/MenuStyle';
+import Configuration from './Configuration';
 
 const Menu = ({
     modalLogin,
@@ -8,6 +9,7 @@ const Menu = ({
 }) => {
 
     const [closeSession, setCloseSession] = React.useState(false);
+    const [configuration, setConfiguration] = React.useState(false);
 
     const handleLogin = () => {
         Alert.alert(
@@ -54,7 +56,7 @@ const Menu = ({
                 </View>
             </View>
 
-            <View style={[{alignItems:'center', justifyContent:"center"}]}>
+            <View style={[{alignItems:'center', marginTop : 30}]}>
                 <Pressable
                     style={[ styles.button, styles.btnDiv]}
                     onPress={() => setModalLogin(false)}
@@ -99,11 +101,21 @@ const Menu = ({
                     <Text style={styles.textButton}>Deudas</Text>
                 </Pressable>
 
+                <Pressable
+                    style={[styles.button, styles.btnStats]}
+                    onPress={() => setConfiguration(true)}
+                >
+                    <Image
+                        style={styles.image}
+                        source={require('../img/stats.png')}
+                    />
+                    <Text style={styles.textButton}>Estadisticas</Text>
+                </Pressable>
 
 
                 <Pressable
                     style={[styles.button, styles.btnSet]}
-                    onPress={() => setModalLogin(false)}
+                    onPress={() => setConfiguration(true)}
                 >
                     <Image
                         style={styles.image}
@@ -111,8 +123,26 @@ const Menu = ({
                     />
                     <Text style={styles.textButton}>Ajustes</Text>
                 </Pressable>
+
+
+
+                
                 
             </View>
+
+            
+
+            <Modal
+                animationType="slide"
+                visible={configuration}
+                onRequestClose={() => {
+                    setConfiguration(false);
+                }}
+            >
+                <Configuration
+                    setConfiguration={setConfiguration}
+                />
+            </Modal>
             <Image
                     style={styles.imageDino}
                     source={require('../img/dinofachero.png')}

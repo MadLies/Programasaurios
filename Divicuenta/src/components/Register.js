@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, Modal, ScrollView, Pressable , StyleSheet , TextInput, Image, Alert} from 'react-native'
 import { registerStyle as styles } from '../styles/RegisterStyle';
+import { Picker } from '@react-native-picker/picker';
 
 const Register = ({
 modalRegister,
@@ -112,6 +113,30 @@ setModalRegister,
                 onChangeText={setCountry}
               
               />
+          </View>
+
+          <View style={styles.form}>
+              <Text style={styles.label}>Divisa</Text>
+              <Picker
+                style={styles.pick}
+                //Meter base de datos manuel perro hpta
+                
+                >
+                    
+                    <Picker.Item label="--Seleccione--" value="" />
+                    <Picker.Item label="MXN" value="MXN" />
+                    <Picker.Item label="USD" value="USD" />
+                    <Picker.Item label="EUR" value="EUR" />
+                    <Picker.Item label="COP" value="COP" />
+                    <Picker.Item label="GBP" value="GBP" />
+                    <Picker.Item label="ARS" value="ARS" />
+                    <Picker.Item label="BRL" value="BRL" />
+                    <Picker.Item label="CLP" value="CLP" />
+                    <Picker.Item label="JPY" value="JPY" />
+
+                </Picker>
+
+          
           </View>
 
           <View style={styles.form}>

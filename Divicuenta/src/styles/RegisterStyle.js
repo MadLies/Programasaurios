@@ -72,6 +72,9 @@ const registerStyle = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
     },
+
+
+ 
     btnSubmit: {
         width: '100%',
         height: 40,
