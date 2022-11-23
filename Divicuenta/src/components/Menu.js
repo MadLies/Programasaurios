@@ -1,7 +1,9 @@
 import React from 'react'
+import { useState } from 'react';
 import { View, Text, Modal, ScrollView, Pressable, StyleSheet, TextInput, Image, Alert } from 'react-native'
 import { menuStyle as styles } from '../styles/MenuStyle';
 import Configuration from './Configuration';
+import NewBill from './NewBill';
 
 const Menu = ({
     modalLogin,
@@ -9,6 +11,7 @@ const Menu = ({
 }) => {
 
     const [closeSession, setCloseSession] = React.useState(false);
+    const [newBill, setNewBill] = useState(false);
     const [configuration, setConfiguration] = React.useState(false);
 
     const handleLogin = () => {
@@ -59,7 +62,7 @@ const Menu = ({
             <View style={[{alignItems:'center', marginTop : 30}]}>
                 <Pressable
                     style={[ styles.button, styles.btnDiv]}
-                    onPress={() => setModalLogin(false)}
+                    onPress={() => setNewBill(true)}
                 >
                     <Image
                         style={styles.image}
@@ -103,7 +106,7 @@ const Menu = ({
 
                 <Pressable
                     style={[styles.button, styles.btnStats]}
-                    onPress={() => setConfiguration(true)}
+                    onPress={() => setModalLogin(false)}
                 >
                     <Image
                         style={styles.image}
@@ -130,7 +133,12 @@ const Menu = ({
                 
             </View>
 
-            
+
+            <NewBill
+                newBill = {newBill}
+            />
+
+
 
             <Modal
                 animationType="slide"
