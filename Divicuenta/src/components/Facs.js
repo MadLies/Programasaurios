@@ -259,7 +259,7 @@ const facs = ({
       {!isValidate?      
        <Image  
           style={styles.image}
-          source={require('../img/goku.png')}
+          source={require('../img/dino1.png')}
        /> : null}
 
        <Image
@@ -281,11 +281,11 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
     position: 'absolute',
     alignSelf: 'center',
-    bottom: 0,
+    bottom: 10,
     zIndex: -1,
     
   },

@@ -33,7 +33,12 @@ const ListadoGastos = ({gastos, setModal, setGasto , filtro , gastosFiltrados}) 
             <Text style={styles.noGastos}>No hay gastos</Text>
 
         )}
-        
+
+
+        <Image
+            style={styles.image}
+            source={require('../img/dino2.png')}
+        />
 
     </View>
   )
@@ -60,6 +65,16 @@ const styles = StyleSheet.create({
         marginVertical: 50,
     },
 
+    image: {
+       
+        width: 350,
+        height: 250,
+        marginTop: 100,
+        position: 'relative',
+        zIndex: 2,
+  
+         
+    },
 })  
 
 export default ListadoGastos
