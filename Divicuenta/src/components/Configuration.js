@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Modal, ScrollView, Pressable, StyleSheet, TextInput, Image, Alert } from 'react-native'
 import configurationStyle from '../styles/CongfigurationStyle'
 import { Picker } from '@react-native-picker/picker'
+import playRoar from '../functions/PlayRoar'
 
 const Configuration = ({
     setConfiguration,
@@ -102,10 +103,16 @@ const Configuration = ({
                 >
                     <Text style={configurationStyle.submitText}>Aplicar cambios</Text>
                 </Pressable>
-                <Image
-                    style={configurationStyle.image}
-                    source={require('../img/doi.png')}
-                />
+                <Pressable
+                    onPress={()=> playRoar()}
+                >
+                    <Image
+                        style={configurationStyle.image}
+                        source={require('../img/doi.png')}
+                    />
+
+                </Pressable>
+
 
             </ScrollView>
         </View>
