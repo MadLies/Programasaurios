@@ -177,7 +177,7 @@ const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
                     >
                         <Image
                             style={NewBillStyle.image}
-                            source={require('../img/doi.png')}
+                            source={require('../img/dinoBill.png')}
                         />
 
                     </Pressable>
