@@ -1,12 +1,23 @@
 import React from 'react'
-import { View, Text, Modal, ScrollView, Pressable , StyleSheet , TextInput, Image, Alert} from 'react-native'
+import { useState } from 'react';
+import { View, Text, Modal, ScrollView, Pressable, StyleSheet, TextInput, Image, Alert } from 'react-native'
+import { menuStyle as styles } from '../styles/MenuStyle';
+import playRoar from '../functions/PlayRoar'
+import Configuration from './Configuration';
+import NewBill from './NewBill';
+import Stats from './Stats';
 
 const Menu = ({
-modalLogin,
-setModalLogin,
-})=>{
+    modalLogin,
+    setModalLogin,
+}) => {
 
     const [closeSession, setCloseSession] = React.useState(false);
+    const [newBill, setNewBill] = useState(false);
+    const [configuration, setConfiguration] = React.useState(false);
+    const [bill, setBill] = useState([])
+    const [stat, setStat] = useState(false)
+
 
     const handleLogin = () => {
         Alert.alert(
@@ -17,239 +28,161 @@ setModalLogin,
                 onPress: () => setCloseSession(false),
                 style: "cancel"
             },
-            
-            
-                {
-                    text: "Aceptar",
-                    onPress: () => setModalLogin(false),
 
-                }
+
+            {
+                text: "Aceptar",
+                onPress: () => setModalLogin(false),
+
+            }
             ]
         );
-    
     }
 
-    return(
+
+    return (
         <View style={styles.container}>
             <Image
                 style={styles.imageBack}
                 source={require('../img/Menu.png')}
             />
-          <View style={styles.header}>
-            <View style={styles.line}>
-             <Text style={styles.title}>Menu</Text>
+            <View style={styles.header}>
+                <View style={styles.line}>
+                    <Text style={styles.title}>Menu</Text>
+                </View>
+                <View style={styles.line2}>
+                    <Pressable
+                        style={styles.close}
+                        onPress={handleLogin}
+                    >
+                        <Image
+                            style={styles.close}
+                            source={require('../img/exit.png')}
+                        >
+                        </Image>
+                    </Pressable>
+                </View>
             </View>
-            <View style={styles.line2}>
-            <Pressable
-              style={styles.close} 
-              onPress={handleLogin}
-              >
-                <Image  
-                style={styles.close}
-                source={require('../img/exit.png')}
+
+            <View style={[{ alignItems: 'center', marginTop: 30 }]}>
+                <Pressable
+                    style={[styles.button, styles.btnDiv]}
+                    onPress={() => setNewBill(true)}
                 >
-                </Image>
-            </Pressable>
-           </View>
-          </View>
-         
-        
-          <Pressable
-                style={[styles.button,  styles.btnDiv]}
-                onPress={() => setModalLogin(false)}
-                >   
                     <Image
                         style={styles.image}
                         source={require('../img/calculadora.png')}
                     />
-                    <Text style={styles.textButton}>Dividide tu cuenta</Text>
-          </Pressable>
-        
-          <Pressable
-                style={[styles.button, styles.btnFriend]}
-                onPress={() => setModalLogin(false)}
-                >   
+                    <Text style={styles.textButton}>Divide tu cuenta</Text>
+                </Pressable>
+
+                <Pressable
+                    style={[styles.button, styles.btnFriend]}
+                    onPress={() => setModalLogin(false)}
+                >
                     <Image
                         style={styles.image}
                         source={require('../img/friends.png')}
                     />
                     <Text style={styles.textButton}>Amigos</Text>
-          </Pressable>
-        
-          <Pressable
-                style={[styles.button, styles.btnNoti]} 
-                onPress={() => setModalLogin(false)}
-                >   
+                </Pressable>
+
+                <Pressable
+                    style={[styles.button, styles.btnNoti]}
+                    onPress={() => setModalLogin(false)}
+                >
                     <Image
                         style={styles.image}
                         source={require('../img/campana.png')}
                     />
                     <Text style={styles.textButton}>Anuncios</Text>
-          </Pressable>
+                </Pressable>
 
-          <Pressable
-                style={[styles.button, styles.btnDeu]}
-                onPress={() => setModalLogin(false)}
-                >   
+                <Pressable
+                    style={[styles.button, styles.btnDeu]}
+                    onPress={() => setModalLogin(false)}
+                >
                     <Image
                         style={styles.image}
                         source={require('../img/deudas.png')}
                     />
                     <Text style={styles.textButton}>Deudas</Text>
-          </Pressable>
-    
+                </Pressable>
+
+                <Pressable
+                    style={[styles.button, styles.btnStats]}
+                    onPress={() => setStat(true)}
+                >
+                    <Image
+                        style={styles.image}
+                        source={require('../img/stats.png')}
+                    />
+                    <Text style={styles.textButton}>Estadisticas</Text>
+                </Pressable>
 
 
-          <Pressable
-                style={[styles.button, styles.btnSet]}
-                onPress={() => setModalLogin(false)}
-                >   
+                <Pressable
+                    style={[styles.button, styles.btnSet]}
+                    onPress={() => setConfiguration(true)}
+                >
                     <Image
                         style={styles.image}
                         source={require('../img/ajustes.png')}
                     />
                     <Text style={styles.textButton}>Ajustes</Text>
-          </Pressable>
-          <Image 
-            style={styles.imageDino}
-            source={require('../img/dinofachero.png')}
+                </Pressable>
+
+
+
+
+
+            </View>
+
+
+            <NewBill
+                newBill={newBill}
+                bill={bill}
+                setBill={setBill}
+                setNewBill={setNewBill}
             />
+            <Modal
+                animationType="slide"
+                visible={stat}
+                onRequestClose={() => {
+                    setStat(false);
+                }}
+                >
+                <Stats
+                    stat = {stat}
+                    setStat = {setStat}
+                />
+            </Modal>    
+
+
+            <Modal
+                animationType="slide"
+                visible={configuration}
+                onRequestClose={() => {
+                    setConfiguration(false);
+                }}
+            >
+                <Configuration
+                    setConfiguration={setConfiguration}
+                />
+            </Modal>
+
+            <Pressable
+                style={[styles.btnImage]}
+                onPress={()=> playRoar() }
+            >
+                <Image
+                    style={styles.imageDino}
+                    source={require('../img/dinofachero.png')}
+                />
+            </Pressable>
         </View>
 
-)}
-
-const styles = StyleSheet.create({
-
-container:{
-    flex:1,
-    backgroundColor: '#fff',
-
-    
-},
-imageBack: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    zIndex: -2,
-},
-
-header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    marginVertical: 40,
-    paddingHorizontal: 20,
-    
-},
-
-line: {
-    flex: 1,
-    backgroundColor: '#A6D1E6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 20,
-    padding: 10,
-    borderRadius: 15,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-        width: 0,
-        height: 10,
-    },
-    shadowOpacity: 0.51,
-    shadowRadius: 13.16,
-
-    elevation: 20
-},
-
-line2: {   
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    paddingHorizontal: 10,
-},
-
-title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: '#fff',
-},
-close: {
-    width: 30,
-    height: 30,
-},
-
-button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '45%',
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth : 1,
-    borderRadius: 15,
-    marginVertical: 20,
-    paddingHorizontal: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-        width: 0,
-        height: 4,
-    },
-    shadowOpacity: 0.32,
-    shadowRadius: 5.46,
-
-    elevation: 9,
-},
-
-btnDiv: {
-    backgroundColor: '#8D72E1',
-    marginLeft: 50,
-
-},
-
-btnFriend: {
-    backgroundColor: '#1363DF',
-    marginLeft: 100,
-},
-
-btnNoti: {
-    backgroundColor: '#66DE93',
-    marginLeft: 150,
-},
-
-btnDeu: {
-    backgroundColor: '#FBDF07',
-    marginLeft: 50,
-},
-
-btnSet: {
-    backgroundColor: '#FF9551',
-    marginLeft: 100,
-},
-
-textButton: {
-    fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold',
-    marginLeft: 10,
-},
-
-image: {
-    width: 40,
-    height: 40,
-},
-
-imageDino: {
-    width: 90,
-    height: 130,
-    position: 'absolute',
-    bottom: 20,
-    left: 30,
-    zIndex: 2,
-},
-
-})
+    )
+}
 
 export default Menu
