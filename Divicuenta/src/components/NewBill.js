@@ -23,31 +23,33 @@ const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
                 [, { Text: 'OK' }]
             );
             return
-        } 
+        }
 
         Alert.alert(
             "¿Estas seguro de guardar los cambios?",
             "Los cambios se guardaran en la base de datos y no se podran recuperar",
             [{ text: "Cancelar", style: "cancel" },
-            { text: "Aceptar", onPress: () => {
-                const nBill = {
-                    name,
-                    date,
-                    total,
-                    currency,
-                    participants
+            {
+                text: "Aceptar", onPress: () => {
+                    const nBill = {
+                        name,
+                        date,
+                        total,
+                        currency,
+                        participants
+                    }
+
+                    setBill([...bill, nBill])
+                    setNewBill(false)
+                    setName('')
+                    setDate(new Date())
+                    setTotal('')
+                    setCurrency('')
+                    setParticipants('')
                 }
-        
-                setBill([...bill, nBill])
-                setNewBill(false)
-                setName('')
-                setDate(new Date())
-                setTotal('')
-                setCurrency('')
-                setParticipants('')
-            } }],
+            }],
         );
-        
+
     }
 
 
@@ -169,10 +171,17 @@ const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
                     >
                         <Text style={NewBillStyle.submitText}>Aceptar</Text>
                     </Pressable>
-                    <Image
-                        style={NewBillStyle.image}
-                        source={require('../img/doi.png')}
-                    />
+
+                    <Pressable
+                        onPress={()=> playRoar()}
+                    >
+                        <Image
+                            style={NewBillStyle.image}
+                            source={require('../img/dinoBill.png')}
+                        />
+
+                    </Pressable>
+
 
                 </ScrollView>
             </View>

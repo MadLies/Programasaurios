@@ -27,6 +27,7 @@ import Forget from './src/components/Forget';
 import Menu from './src/components/Menu';
 import AppStyle from './src/styles/AppStyle.js'
 import { appStyle as styles } from './src/styles/AppStyle.js'
+import playRoar from './src/functions/PlayRoar';
 
 const App = () => {
   const [modalLogin, setModalLogin] = useState(false);
@@ -96,10 +97,16 @@ const App = () => {
             <Text style={styles.text4}>Regístrate</Text>
           </Pressable>
 
-          <Image
-            style={styles.dinolog}
-            source={require('./src/img/dinolog.png')}
-          />
+          <Pressable
+            onPress={()=>playRoar()}
+          >
+            <Image
+              style={styles.dinolog}
+              source={require('./src/img/dinolog.png')}
+            />
+
+          </Pressable>
+
 
           <Pressable
             style={[styles.buttonFor]}
