@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { View, Text, Modal, ScrollView, Pressable, StyleSheet, TextInput, Image, Alert } from 'react-native'
 import { menuStyle as styles } from '../styles/MenuStyle';
+import playRoar from '../functions/PlayRoar'
 import Configuration from './Configuration';
 import NewBill from './NewBill';
 import Stats from './Stats';
@@ -16,6 +17,7 @@ const Menu = ({
     const [configuration, setConfiguration] = React.useState(false);
     const [bill, setBill] = useState([])
     const [stat, setStat] = useState(false)
+
 
     const handleLogin = () => {
         Alert.alert(
@@ -62,9 +64,9 @@ const Menu = ({
                 </View>
             </View>
 
-            <View style={[{alignItems:'center', marginTop : 30}]}>
+            <View style={[{ alignItems: 'center', marginTop: 30 }]}>
                 <Pressable
-                    style={[ styles.button, styles.btnDiv]}
+                    style={[styles.button, styles.btnDiv]}
                     onPress={() => setNewBill(true)}
                 >
                     <Image
@@ -132,16 +134,16 @@ const Menu = ({
 
 
 
-                
-                
+
+
             </View>
 
 
             <NewBill
-                newBill = {newBill}
-                bill = {bill}
-                setBill = {setBill}
-                setNewBill = {setNewBill}
+                newBill={newBill}
+                bill={bill}
+                setBill={setBill}
+                setNewBill={setNewBill}
             />
             <Modal
                 animationType="slide"
@@ -168,10 +170,16 @@ const Menu = ({
                     setConfiguration={setConfiguration}
                 />
             </Modal>
-            <Image
+
+            <Pressable
+                style={[styles.btnImage]}
+                onPress={()=> playRoar() }
+            >
+                <Image
                     style={styles.imageDino}
                     source={require('../img/dinofachero.png')}
                 />
+            </Pressable>
         </View>
 
     )

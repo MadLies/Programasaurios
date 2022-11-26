@@ -19,9 +19,14 @@
     "react-native-circular-progress-indicator": "^4.4.0",
     "react-native-date-picker": "^4.2.6",
     "react-native-datepicker": "^1.7.2",
+<<<<<<< HEAD
     "react-native-reanimated": "^2.13.0",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-svg": "^12.4.4"
+=======
+    "react-native-responsive-fontsize": "^0.5.1",
+    "react-native-sound": "^0.11.2"
+>>>>>>> 337f14034b66d8b2641f03b8d92469d7b0895ce6
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

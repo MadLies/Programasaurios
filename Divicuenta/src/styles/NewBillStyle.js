@@ -112,11 +112,11 @@ const NewBillStyle = StyleSheet.create({
     },
 
     image:{
-        width: 300,
-        height: 300,
-        borderRadius: 100,
-        marginBottom: 20,
-        
+        width: 200,
+        height: 200,
+        //borderRadius: 100,
+        marginHorizontal: "25%",
+        marginVertical: "5%"
 
     }
 

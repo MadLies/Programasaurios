@@ -26,6 +26,6 @@ software development good practices.
 > - Use of agile methodologies, specifically SCRUM, for the iterative development of projects  
 
 > Tools used:
-> - Ionic framework for the development of hybrid applications
+> - React Native to develop an android application
 > - Git for version control
 > - Jira Software for project management
