@@ -104,6 +104,16 @@ const menuStyle = StyleSheet.create({
         color: '#fff',
     },
 
+    btnImage: {
+        flexDirection: 'row',   
+        alignItems: 'flex-start',
+        justifyContent: "flex-start",
+        paddingHorizontal: 3,
+        marginVertical: "-20%",
+        width: "100%",
+        height: "100%",
+    },
+
 
     image: {
         width: 40,
@@ -118,7 +128,7 @@ const menuStyle = StyleSheet.create({
         zIndex: 2,
         resizeMode: 'repeat', 
         justifyContent: "flex-end",
-        bottom: 0,
+        //bottom: 0,
     },
 
 })
