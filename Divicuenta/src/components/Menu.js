@@ -4,6 +4,7 @@ import { View, Text, Modal, ScrollView, Pressable, StyleSheet, TextInput, Image,
 import { menuStyle as styles } from '../styles/MenuStyle';
 import Configuration from './Configuration';
 import NewBill from './NewBill';
+import Stats from './Stats';
 
 const Menu = ({
     modalLogin,
@@ -14,6 +15,7 @@ const Menu = ({
     const [newBill, setNewBill] = useState(false);
     const [configuration, setConfiguration] = React.useState(false);
     const [bill, setBill] = useState([])
+    const [stat, setStat] = useState(false)
 
     const handleLogin = () => {
         Alert.alert(
@@ -33,8 +35,8 @@ const Menu = ({
             }
             ]
         );
-
     }
+
 
     return (
         <View style={styles.container}>
@@ -107,7 +109,7 @@ const Menu = ({
 
                 <Pressable
                     style={[styles.button, styles.btnStats]}
-                    onPress={() => setModalLogin(false)}
+                    onPress={() => setStat(true)}
                 >
                     <Image
                         style={styles.image}
@@ -141,7 +143,18 @@ const Menu = ({
                 setBill = {setBill}
                 setNewBill = {setNewBill}
             />
-
+            <Modal
+                animationType="slide"
+                visible={stat}
+                onRequestClose={() => {
+                    setStat(false);
+                }}
+                >
+                <Stats
+                    stat = {stat}
+                    setStat = {setStat}
+                />
+            </Modal>    
 
 
             <Modal
