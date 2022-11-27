@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="divicuentas_Prueba2_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>divicuentas.Cuenta</class>
+    <class>divicuentas.Grupo</class>
+    <class>divicuentas.Pago</class>
+    <class>divicuentas.Amigo</class>
+    <class>divicuentas.Transaccion</class>
+    <class>divicuentas.Notificacion</class>
+    <class>divicuentas.Usuario</class>
+    <class>divicuentas.Integrantecuenta</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/divicuentas?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="@DataBases2803"/>
+    </properties>
+  </persistence-unit>
+</persistence>
