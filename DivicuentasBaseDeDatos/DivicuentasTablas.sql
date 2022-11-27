@@ -5,11 +5,11 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema divicuentas
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema divicuentas
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `divicuentas` DEFAULT CHARACTER SET utf8 ;
 USE `divicuentas` ;
@@ -106,26 +106,6 @@ CREATE TABLE IF NOT EXISTS `divicuentas`.`IntegranteCuenta` (
   CONSTRAINT `fk_Cuenta_has_Usuario_Usuario1`
     FOREIGN KEY (`celular`)
     REFERENCES `divicuentas`.`Usuario` (`celular`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `divicuentas`.`Borrador_cuenta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `divicuentas`.`Borrador_cuenta` (
-  `Grupo_idGrupo` INT NOT NULL,
-  `Saldo_idSaldo` INT NOT NULL,
-  `Nombre_borrador` VARCHAR(45) NULL,
-  `Fecha_borrador` VARCHAR(45) NULL,
-  `Divisa_borrador` VARCHAR(45) NULL,
-  `Total_borrador` VARCHAR(45) NULL,
-  PRIMARY KEY (`Grupo_idGrupo`, `Saldo_idSaldo`),
-  INDEX `fk_Grupo_has_Saldo_Grupo1_idx` (`Grupo_idGrupo` ASC) VISIBLE,
-  CONSTRAINT `fk_Grupo_has_Saldo_Grupo1`
-    FOREIGN KEY (`Grupo_idGrupo`)
-    REFERENCES `divicuentas`.`Grupo` (`idGrupo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
