@@ -6,6 +6,7 @@ import playRoar from '../functions/PlayRoar'
 import Configuration from './Configuration';
 import NewBill from './NewBill';
 import Stats from './Stats';
+import Due from './Due';
 
 const Menu = ({
     modalLogin,
@@ -17,6 +18,7 @@ const Menu = ({
     const [configuration, setConfiguration] = React.useState(false);
     const [bill, setBill] = useState([])
     const [stat, setStat] = useState(false)
+    const [deuda, setDeuda] = useState(false)
 
 
     const handleLogin = () => {
@@ -100,7 +102,7 @@ const Menu = ({
 
                 <Pressable
                     style={[styles.button, styles.btnDeu]}
-                    onPress={() => setModalLogin(false)}
+                    onPress={() => setDeuda(true)}
                 >
                     <Image
                         style={styles.image}
@@ -145,6 +147,22 @@ const Menu = ({
                 setBill={setBill}
                 setNewBill={setNewBill}
             />
+
+            <Modal
+                animationType="slide"
+                visible={deuda}
+                onRequestClose={() => {
+                    setDeuda(false)
+                }}
+            >
+            
+                <Due
+                    setDeuda={setDeuda}
+                />
+
+
+                </Modal>
+
             <Modal
                 animationType="slide"
                 visible={stat}
