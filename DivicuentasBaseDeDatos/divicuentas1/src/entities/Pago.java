@@ -49,15 +49,13 @@ public class Pago implements Serializable {
     public Pago() {
     }
 
-    public Pago(Integer idPago) {
-        this.idPago = idPago;
-    }
-
-    public Pago(Integer idPago, Date fechaPago) {
+    public Pago(Integer idPago, Date fechaPago, List<Transaccion> transaccionList, List<Notificacion> notificacionList) {
         this.idPago = idPago;
         this.fechaPago = fechaPago;
+        this.transaccionList = transaccionList;
+        this.notificacionList = notificacionList;
     }
-
+    
     public Integer getIdPago() {
         return idPago;
     }

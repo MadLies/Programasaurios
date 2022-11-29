@@ -75,6 +75,19 @@ public class Cuenta implements Serializable {
         this.idCuenta = idCuenta;
     }
 
+    public Cuenta(Integer idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta, String divisaCuenta, String tipoActividad, String adjuntos, List<Integrantecuenta> integrantecuentaList, List<Transaccion> transaccionList, List<Notificacion> notificacionList) {
+        this.idCuenta = idCuenta;
+        this.nombreCuenta = nombreCuenta;
+        this.fechaCuenta = fechaCuenta;
+        this.totalCuenta = totalCuenta;
+        this.divisaCuenta = divisaCuenta;
+        this.tipoActividad = tipoActividad;
+        this.adjuntos = adjuntos;
+        this.integrantecuentaList = integrantecuentaList;
+        this.transaccionList = transaccionList;
+        this.notificacionList = notificacionList;
+    }
+
     public Cuenta(Integer idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta) {
         this.idCuenta = idCuenta;
         this.nombreCuenta = nombreCuenta;

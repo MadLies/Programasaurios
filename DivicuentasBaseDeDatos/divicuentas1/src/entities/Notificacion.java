@@ -56,14 +56,14 @@ public class Notificacion implements Serializable {
     public Notificacion() {
     }
 
-    public Notificacion(Integer idNotificacion) {
-        this.idNotificacion = idNotificacion;
-    }
-
-    public Notificacion(Integer idNotificacion, String estado, String mensaje) {
+    public Notificacion(Integer idNotificacion, String estado, String mensaje, Cuenta idCuenta, Pago idPago, Usuario usuarioGenera, Usuario usuarioRecibe) {
         this.idNotificacion = idNotificacion;
         this.estado = estado;
         this.mensaje = mensaje;
+        this.idCuenta = idCuenta;
+        this.idPago = idPago;
+        this.usuarioGenera = usuarioGenera;
+        this.usuarioRecibe = usuarioRecibe;
     }
 
     public Integer getIdNotificacion() {

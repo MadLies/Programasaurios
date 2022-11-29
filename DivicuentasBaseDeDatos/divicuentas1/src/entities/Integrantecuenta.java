@@ -45,15 +45,16 @@ public class Integrantecuenta implements Serializable {
     public Integrantecuenta() {
     }
 
-    public Integrantecuenta(IntegrantecuentaPK integrantecuentaPK) {
-        this.integrantecuentaPK = integrantecuentaPK;
-    }
 
-    public Integrantecuenta(IntegrantecuentaPK integrantecuentaPK, int valorPagar, int abonado) {
+
+    public Integrantecuenta(IntegrantecuentaPK integrantecuentaPK, int valorPagar, int abonado, Cuenta cuenta, Usuario usuario) {
         this.integrantecuentaPK = integrantecuentaPK;
         this.valorPagar = valorPagar;
         this.abonado = abonado;
+        this.cuenta = cuenta;
+        this.usuario = usuario;
     }
+    
 
     public Integrantecuenta(int idCuenta, int celular) {
         this.integrantecuentaPK = new IntegrantecuentaPK(idCuenta, celular);

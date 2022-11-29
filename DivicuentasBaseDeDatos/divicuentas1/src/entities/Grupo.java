@@ -52,6 +52,14 @@ public class Grupo implements Serializable {
     public Grupo() {
     }
 
+    public Grupo(Integer idGrupo, String nombreGrupo, String descripcionGrupo, List<Usuario> usuarioList, List<Cuenta> cuentaList) {
+        this.idGrupo = idGrupo;
+        this.nombreGrupo = nombreGrupo;
+        this.descripcionGrupo = descripcionGrupo;
+        this.usuarioList = usuarioList;
+        this.cuentaList = cuentaList;
+    }
+
     public Grupo(Integer idGrupo) {
         this.idGrupo = idGrupo;
     }
