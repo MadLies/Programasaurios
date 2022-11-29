@@ -7,6 +7,15 @@
         
         <class>org.kodejava.jpa.entity.Artist</class>
         <class>org.kodejava.jpa.entity.Usuario</class>
+        <class>Modelo.Amigo</class>
+        <class>Modelo.Cuenta</class>
+        <class>Modelo.Grupo</class>
+        <class>Modelo.Integrantecuenta</class>
+        <class>Modelo.IntegrantecuentaPK</class>
+        <class>Modelo.Notificacion</class>
+        <class>Modelo.Pago</class>
+        <class>Modelo.Transaccion</class>
+        <class>Modelo.Usuario</class>
         
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
