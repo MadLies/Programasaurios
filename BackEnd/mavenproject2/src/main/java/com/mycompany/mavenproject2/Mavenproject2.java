@@ -25,23 +25,8 @@ public class Mavenproject2 {
     
     public static void main(String[] args) {
         
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        EntityManager manager = factory.createEntityManager();
+        EntityManager
         
-         //Do something with the entity manager.
-        //Usuario amigo = manager.find(Usuario.class, 1L);
-        //System.out.println("artist = " + amigo);
-        
-        
-        
-        Usuario artista = new Usuario(1244322, "String name", "String nickname", "String pais", "String divisa", "String email", "String contrasena");
-       
-        manager.getTransaction().begin();
-        
-        manager.persist(artista);
-        
-        manager.getTransaction().commit();
-        
-        
+     
     }
 }

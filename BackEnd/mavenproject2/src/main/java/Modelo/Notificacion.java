@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -117,6 +118,52 @@ public class Notificacion implements Serializable{
     @Override
     public String toString() {
         return "Notificacion{" + "idNotificacion=" + idNotificacion + ", cuenta=" + cuenta + ", pago=" + pago + ", UsuarioGenera=" + UsuarioGenera + ", usuarioRecibe=" + usuarioRecibe + ", estado=" + estado + ", mensaje=" + mensaje + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.idNotificacion;
+        hash = 17 * hash + Objects.hashCode(this.cuenta);
+        hash = 17 * hash + Objects.hashCode(this.pago);
+        hash = 17 * hash + Objects.hashCode(this.UsuarioGenera);
+        hash = 17 * hash + Objects.hashCode(this.usuarioRecibe);
+        hash = 17 * hash + Objects.hashCode(this.estado);
+        hash = 17 * hash + Objects.hashCode(this.mensaje);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Notificacion other = (Notificacion) obj;
+        if (this.idNotificacion != other.idNotificacion) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, other.estado)) {
+            return false;
+        }
+        if (!Objects.equals(this.mensaje, other.mensaje)) {
+            return false;
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.pago, other.pago)) {
+            return false;
+        }
+        if (!Objects.equals(this.UsuarioGenera, other.UsuarioGenera)) {
+            return false;
+        }
+        return Objects.equals(this.usuarioRecibe, other.usuarioRecibe);
     }
     
     

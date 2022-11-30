@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -115,6 +116,68 @@ public class Cuenta implements Serializable{
 
     public void setIdGrupo(Usuario IdGrupo) {
         this.IdGrupo = IdGrupo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + this.idCuenta;
+        hash = 23 * hash + Objects.hashCode(this.nombreCuenta);
+        hash = 23 * hash + Objects.hashCode(this.fechaCuenta);
+        hash = 23 * hash + Float.floatToIntBits(this.totalCuenta);
+        hash = 23 * hash + Objects.hashCode(this.divisaCuenta);
+        hash = 23 * hash + Objects.hashCode(this.tipoActividad);
+        hash = 23 * hash + Objects.hashCode(this.MisCuentas);
+        hash = 23 * hash + Objects.hashCode(this.MisGenerados);
+        hash = 23 * hash + Objects.hashCode(this.MisRecibidos);
+        hash = 23 * hash + Objects.hashCode(this.MisNotificaciones);
+        hash = 23 * hash + Objects.hashCode(this.IdGrupo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cuenta other = (Cuenta) obj;
+        if (this.idCuenta != other.idCuenta) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.totalCuenta) != Float.floatToIntBits(other.totalCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombreCuenta, other.nombreCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.divisaCuenta, other.divisaCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoActividad, other.tipoActividad)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaCuenta, other.fechaCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisCuentas, other.MisCuentas)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisGenerados, other.MisGenerados)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisRecibidos, other.MisRecibidos)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisNotificaciones, other.MisNotificaciones)) {
+            return false;
+        }
+        return Objects.equals(this.IdGrupo, other.IdGrupo);
     }
 
     public Cuenta(int idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta, String divisaCuenta, String tipoActividad, Usuario IdGrupo) {

@@ -7,14 +7,18 @@ package Modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -31,7 +35,7 @@ public class Usuario implements Serializable {
     
     @Id
     @Column(name = "celular")
-    private int Id;
+    private double Id;
     @Column(name = "nombre")
     private String name;
     @Column(name = "nickname")
@@ -79,11 +83,11 @@ public class Usuario implements Serializable {
         this.contrasena = contrasena;
     }
 
-    public int getId() {
+    public double getId() {
         return Id;
     }
 
-    public void setId(int Id) {
+    public void setId(double Id) {
         this.Id = Id;
     }
 
@@ -134,6 +138,144 @@ public class Usuario implements Serializable {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
+
+
+    public List<Amigo> getMisAmigos() {
+        return MisAmigos;
+    }
+
+    public void setMisAmigos(List<Amigo> MisAmigos) {
+        this.MisAmigos = MisAmigos;
+    }
+
+    public List<UsuarioDelGrupo> getMisGrupos() {
+        return MisGrupos;
+    }
+
+    public void setMisGrupos(List<UsuarioDelGrupo> MisGrupos) {
+        this.MisGrupos = MisGrupos;
+    }
+
+    public List<IntegranteCuenta> getMisCuentas() {
+        return MisCuentas;
+    }
+
+    public void setMisCuentas(List<IntegranteCuenta> MisCuentas) {
+        this.MisCuentas = MisCuentas;
+    }
+
+    public List<Transaccion> getMisSalidas() {
+        return MisSalidas;
+    }
+
+    public void setMisSalidas(List<Transaccion> MisSalidas) {
+        this.MisSalidas = MisSalidas;
+    }
+
+    public List<Transaccion> getMisEntradas() {
+        return MisEntradas;
+    }
+
+    public void setMisEntradas(List<Transaccion> MisEntradas) {
+        this.MisEntradas = MisEntradas;
+    }
+
+    public List<Notificacion> getMisGenerados() {
+        return MisGenerados;
+    }
+
+    public void setMisGenerados(List<Notificacion> MisGenerados) {
+        this.MisGenerados = MisGenerados;
+    }
+
+    public List<Notificacion> getMisRecibidos() {
+        return MisRecibidos;
+    }
+
+    public void setMisRecibidos(List<Notificacion> MisRecibidos) {
+        this.MisRecibidos = MisRecibidos;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (this.Id != other.Id) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.nickname, other.nickname)) {
+            return false;
+        }
+        if (!Objects.equals(this.pais, other.pais)) {
+            return false;
+        }
+        if (!Objects.equals(this.divisa, other.divisa)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.contrasena, other.contrasena)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisAmigos, other.MisAmigos)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisGrupos, other.MisGrupos)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisCuentas, other.MisCuentas)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisSalidas, other.MisSalidas)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisEntradas, other.MisEntradas)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisGenerados, other.MisGenerados)) {
+            return false;
+        }
+        return Objects.equals(this.MisRecibidos, other.MisRecibidos);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "Id=" + Id + ", name=" + name + ", nickname=" + nickname + ", pais=" + pais + ", divisa=" + divisa + ", email=" + email + ", contrasena=" + contrasena + ", MisAmigos=" + MisAmigos + ", MisGrupos=" + MisGrupos + ", MisCuentas=" + MisCuentas + ", MisSalidas=" + MisSalidas + ", MisEntradas=" + MisEntradas + ", MisGenerados=" + MisGenerados + ", MisRecibidos=" + MisRecibidos + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.Id) ^ (Double.doubleToLongBits(this.Id) >>> 32));
+        hash = 23 * hash + Objects.hashCode(this.name);
+        hash = 23 * hash + Objects.hashCode(this.nickname);
+        hash = 23 * hash + Objects.hashCode(this.pais);
+        hash = 23 * hash + Objects.hashCode(this.divisa);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + Objects.hashCode(this.contrasena);
+        hash = 23 * hash + Objects.hashCode(this.MisAmigos);
+        hash = 23 * hash + Objects.hashCode(this.MisGrupos);
+        hash = 23 * hash + Objects.hashCode(this.MisCuentas);
+        hash = 23 * hash + Objects.hashCode(this.MisSalidas);
+        hash = 23 * hash + Objects.hashCode(this.MisEntradas);
+        hash = 23 * hash + Objects.hashCode(this.MisGenerados);
+        hash = 23 * hash + Objects.hashCode(this.MisRecibidos);
+        return hash;
+    }
+
     
    
     

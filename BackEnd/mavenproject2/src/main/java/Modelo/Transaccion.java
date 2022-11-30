@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -104,6 +105,48 @@ public class Transaccion implements Serializable{
     @Override
     public String toString() {
         return "Transaccion{" + "idTransaccion=" + idTransaccion + ", valorTransaccion=" + valorTransaccion + ", cuenta=" + cuenta + ", pago=" + pago + ", UsuarioSalida=" + UsuarioSalida + ", usuarioLlegada=" + usuarioLlegada + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + this.idTransaccion;
+        hash = 83 * hash + this.valorTransaccion;
+        hash = 83 * hash + Objects.hashCode(this.cuenta);
+        hash = 83 * hash + Objects.hashCode(this.pago);
+        hash = 83 * hash + Objects.hashCode(this.UsuarioSalida);
+        hash = 83 * hash + Objects.hashCode(this.usuarioLlegada);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Transaccion other = (Transaccion) obj;
+        if (this.idTransaccion != other.idTransaccion) {
+            return false;
+        }
+        if (this.valorTransaccion != other.valorTransaccion) {
+            return false;
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.pago, other.pago)) {
+            return false;
+        }
+        if (!Objects.equals(this.UsuarioSalida, other.UsuarioSalida)) {
+            return false;
+        }
+        return Objects.equals(this.usuarioLlegada, other.usuarioLlegada);
     }
     
     

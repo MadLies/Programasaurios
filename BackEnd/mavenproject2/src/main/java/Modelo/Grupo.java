@@ -7,6 +7,7 @@ package Modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,6 +66,44 @@ public class Grupo implements Serializable{
 
     public void setDescripcionDelGrupo(String DescripcionDelGrupo) {
         this.DescripcionDelGrupo = DescripcionDelGrupo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + this.IdGrupo;
+        hash = 29 * hash + Objects.hashCode(this.NombreDelGrupo);
+        hash = 29 * hash + Objects.hashCode(this.DescripcionDelGrupo);
+        hash = 29 * hash + Objects.hashCode(this.Integrantes);
+        hash = 29 * hash + Objects.hashCode(this.Cuentas);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Grupo other = (Grupo) obj;
+        if (this.IdGrupo != other.IdGrupo) {
+            return false;
+        }
+        if (!Objects.equals(this.NombreDelGrupo, other.NombreDelGrupo)) {
+            return false;
+        }
+        if (!Objects.equals(this.DescripcionDelGrupo, other.DescripcionDelGrupo)) {
+            return false;
+        }
+        if (!Objects.equals(this.Integrantes, other.Integrantes)) {
+            return false;
+        }
+        return Objects.equals(this.Cuentas, other.Cuentas);
     }
 
     @Override

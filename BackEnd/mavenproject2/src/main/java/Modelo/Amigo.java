@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -77,6 +78,40 @@ public class Amigo implements Serializable {
 
     public void setAmigo(Usuario amigo) {
         this.amigo = amigo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.idAmigo);
+        hash = 83 * hash + Objects.hashCode(this.favorito);
+        hash = 83 * hash + Objects.hashCode(this.usuario);
+        hash = 83 * hash + Objects.hashCode(this.amigo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Amigo other = (Amigo) obj;
+        if (!Objects.equals(this.idAmigo, other.idAmigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.favorito, other.favorito)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        return Objects.equals(this.amigo, other.amigo);
     }
 
     public Amigo(Integer idAmigo, Short favorito, Usuario usuario, Usuario amigo) {
