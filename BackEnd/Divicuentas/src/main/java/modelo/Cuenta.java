@@ -57,6 +57,9 @@ public class Cuenta implements Serializable{
     @JoinColumn(name = "IdGrupo")
     private Grupo IdGrupo;
 
+
+    
+    
     @Override
     public String toString() {
         return "Cuenta{" + "idCuenta=" + idCuenta + ", nombreCuenta=" + nombreCuenta + ", fechaCuenta=" + fechaCuenta + ", totalCuenta=" + totalCuenta + ", divisaCuenta=" + divisaCuenta + ", tipoActividad=" + tipoActividad + ", IdGrupo=" + IdGrupo + '}';
@@ -207,10 +210,6 @@ public class Cuenta implements Serializable{
         }
         return Objects.equals(this.IdGrupo, other.IdGrupo);
     }
-
-
-
-    
 
     public Cuenta(int idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta, String divisaCuenta, String tipoActividad, Grupo IdGrupo) {
         this.idCuenta = idCuenta;

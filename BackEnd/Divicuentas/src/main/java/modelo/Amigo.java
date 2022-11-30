@@ -27,9 +27,9 @@ public class Amigo implements Serializable {
     
     @Id
     @Column(name = "idAmigo")
-    private Integer idAmigo;
+    private double idAmigo;
     @Column(name = "favorito")
-    private Short favorito;
+    private int favorito;
 
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,19 +48,19 @@ public class Amigo implements Serializable {
     public Amigo() {
     }
 
-    public Integer getIdAmigo() {
+    public double getIdAmigo() {
         return idAmigo;
     }
 
-    public void setIdAmigo(Integer idAmigo) {
+    public void setIdAmigo(double idAmigo) {
         this.idAmigo = idAmigo;
     }
 
-    public Short getFavorito() {
+    public int getFavorito() {
         return favorito;
     }
 
-    public void setFavorito(Short favorito) {
+    public void setFavorito(int favorito) {
         this.favorito = favorito;
     }
 
@@ -82,13 +82,16 @@ public class Amigo implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.idAmigo);
-        hash = 83 * hash + Objects.hashCode(this.favorito);
-        hash = 83 * hash + Objects.hashCode(this.usuario);
-        hash = 83 * hash + Objects.hashCode(this.amigo);
+        int hash = 5;
+        hash = 37 * hash + (int) (Double.doubleToLongBits(this.idAmigo) ^ (Double.doubleToLongBits(this.idAmigo) >>> 32));
+        hash = 37 * hash + this.favorito;
+        hash = 37 * hash + Objects.hashCode(this.usuario);
+        hash = 37 * hash + Objects.hashCode(this.amigo);
         return hash;
     }
+
+//   
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -114,7 +117,7 @@ public class Amigo implements Serializable {
         return Objects.equals(this.amigo, other.amigo);
     }
 
-    public Amigo(Integer idAmigo, Short favorito, Usuario usuario, Usuario amigo) {
+    public Amigo(double idAmigo, int favorito, Usuario usuario, Usuario amigo) {
         this.idAmigo = idAmigo;
         this.favorito = favorito;
         this.usuario = usuario;

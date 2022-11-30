@@ -85,11 +85,10 @@ public class IntegranteCuenta implements Serializable{
         this.abonado = abonado;
     }
 
-    public IntegranteCuenta(int IntegranteCuenta, Cuenta cuenta, Usuario usuario, double valorPagar, double abonado) {
+    public IntegranteCuenta(int IntegranteCuenta, Cuenta cuenta, Usuario usuario, double abonado) {
         this.IntegranteCuenta = IntegranteCuenta;
         this.cuenta = cuenta;
         this.usuario = usuario;
-        this.valorPagar = valorPagar;
         this.abonado = abonado;
     }
 
