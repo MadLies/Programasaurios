@@ -4,15 +4,15 @@
  */
 package Querys;
 
-import Modelo.Amigo;
-import Modelo.Cuenta;
-import Modelo.Grupo;
-import Modelo.IntegranteCuenta;
-import Modelo.Notificacion;
-import Modelo.Pago;
-import Modelo.Transaccion;
-import Modelo.Usuario;
-import Modelo.UsuarioDelGrupo;
+import modelo.Amigo;
+import modelo.Cuenta;
+import modelo.Grupo;
+import modelo.IntegranteCuenta;
+import modelo.Notificacion;
+import modelo.Pago;
+import modelo.Transaccion;
+import modelo.Usuario;
+import modelo.UsuarioDelGrupo;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
