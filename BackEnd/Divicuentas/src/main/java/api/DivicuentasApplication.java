@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import resources.LoginResource;
+import resources.UserResource;
 //import com.example.helloworld.health.TemplateHealthCheck;
 
 /**
@@ -30,6 +31,9 @@ public class DivicuentasApplication extends Application<DivicuentasConfiguration
     public void run(DivicuentasConfiguration configuration,
                 Environment environment){
         final LoginResource login = new LoginResource();
+        final UserResource debts = new UserResource();
+        
         environment.jersey().register(login);
+        environment.jersey().register(debts);
     }
 }

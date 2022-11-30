@@ -1,4 +1,4 @@
-package api;
+package dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -6,16 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author venus
  */
-public class Saying {
+public class LoginDto {
 
     private String id;
     private String password;
 
-    public Saying() {
+    public LoginDto() {
 
     }
 
-    public Saying(String id, String content) {
+    public LoginDto(String id, String content) {
         this.id = id;
         this.password = content;
 
@@ -30,4 +30,5 @@ public class Saying {
     public String getContent() {
         return password;
     }
+    
 }

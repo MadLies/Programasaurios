@@ -2,7 +2,7 @@
 package resources;
 
 import com.codahale.metrics.annotation.Timed;
-import api.Saying;
+import dto.LoginDto;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.ws.rs.GET;
@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -18,19 +20,13 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/v1/login")
 @Produces(MediaType.APPLICATION_JSON)
+@NoArgsConstructor
 public class LoginResource {
-    private final String number;
-    private final String password;
-    
-    public LoginResource(){
-        this.number = "3004113699";
-        this.password = "estoesunaprueba";
-    }
     
     @GET
     @Timed
-    public Saying sayGoodbye(){ 
-        return new Saying(number, password);
+    public LoginDto login(){ 
+        return new LoginDto("3004113699", "estoesunaprueba");
     }
     
 }
