@@ -12,6 +12,7 @@ import {
   Image,
   ImageBackground,
   Modal,
+  Alert
 } from 'react-native';
 
 import {
@@ -33,7 +34,34 @@ const App = () => {
   const [modalLogin, setModalLogin] = useState(false);
   const [modalRegister, setModalRegister] = useState(false);
   const [modalForget, setModalForget] = useState(false);
+  const [number, setNumber] = useState('');
+  const [password, setPassword] = useState('');
 
+  const checkId = (number, password) => {
+    if (number.length === 10) {
+      const url = 'https://2e96-186-28-28-42.ngrok.io/v1/login/'+number;
+      fetch(url)
+      .then((res) => res.json())
+      .then(resJson => {
+        console.log(resJson)
+        console.log(resJson)
+        if (resJson.content === password && resJson.id === number) {
+          setModalLogin(!modalLogin)
+      } 
+       else {
+        Alert.alert('Error', 'Usuario o contraseña incorrectos')
+        return
+      }
+      }).catch(e=>{console.log(e)
+
+      })
+
+    }
+    else{
+    Alert.alert('Error', 'El número debe tener 10 dígitos')
+    return
+  }
+  }
 
   return (
 
@@ -56,6 +84,8 @@ const App = () => {
             placeholder='Ingresa tu número'
             placeholderTextColor={'#666'}
             maxLength={10}
+            onChangeText={setNumber}
+            value={number}
 
           />
         </View>
@@ -69,13 +99,16 @@ const App = () => {
             returnKeyType='go'
             secureTextEntry
             autoCorrect={false}
-
+            onChangeText={setPassword}
+            value={password}
           />
         </View>
 
         <Pressable
           style={styles.button}
-          onPress={() => setModalLogin(!modalLogin)}
+          onPress={() => {
+            checkId(number, password)
+          }}
         >
           <Text style={styles.text2}>Iniciar Sesion</Text>
         </Pressable>

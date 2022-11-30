@@ -4,6 +4,9 @@ import { View, Text, Modal, ScrollView, Pressable, StyleSheet, TextInput, Image,
 import NewBillStyle from "../styles/NewBillStyle";
 import { Picker } from '@react-native-picker/picker'
 import DatePicker from 'react-native-date-picker'
+import ParticipantForm from "./ParticipantForm";
+import ListUser from "./ListUser";
+import Participant from "./Participant";
 //import DateTimePicker from '@react-native-community/datetimepicker';
 
 const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
@@ -13,6 +16,8 @@ const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
     const [total, setTotal] = useState('')
     const [currency, setCurrency] = useState('')
     const [participants, setParticipants] = useState('')
+    const [addParticipant, setAddParticipant] = useState(false)
+    const [listUser, setListUser] = useState([])
 
 
     const handleNewBill = () => {
@@ -149,19 +154,27 @@ const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
                         </View>
 
                         <Text style={NewBillStyle.label}>Integrantes</Text>
-                        <TextInput
-                            style={NewBillStyle.input}
-                            placeholder='Entre quienes se divide la cuenta'
-                            placeholderTextColor={'#000'}
-                            multiline={true}
-                            numberOfLines={4}
-                            onChangeText={setParticipants}
-                            value={participants}
+                        <Pressable
+                            style={NewBillStyle.button}
+                            onPress={() => {
+                                setAddParticipant(true)
+                                
+                                }}
+                        >
 
-                        //value={number}
-                        //onChangeText={(text) => setNumber(text)}
-                        //cuando la perra de manuel implemente la hpta base de datos, aqui se debe de poner el numero del usuario
-                        />
+                            
+
+                            <Text style={NewBillStyle.buttonText}>Agregar</Text>
+                        </Pressable>
+
+                    
+                    <ListUser
+                        listUser={listUser}
+                        setListUser={setListUser}
+
+                    
+                    />
+                       
 
                     </View>
 
@@ -171,6 +184,8 @@ const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
                     >
                         <Text style={NewBillStyle.submitText}>Aceptar</Text>
                     </Pressable>
+
+                    
 
                     <Pressable
                         onPress={()=> playRoar()}
@@ -182,6 +197,22 @@ const NewBill = ({ newBill, setBill, bill, setNewBill }) => {
 
                     </Pressable>
 
+                    <Modal
+                        animationType='slide'
+                        visible={addParticipant}
+                        onRequestClose={() => {
+                            setAddParticipant(false);
+                        }}  
+                    >
+                        <ParticipantForm 
+                            addParticipant={addParticipant}
+                            setAddParticipant={setAddParticipant}
+                            setListUser={setListUser}
+                            listUser={listUser}
+                        />
+                    </Modal>
+
+                    
 
                 </ScrollView>
             </View>

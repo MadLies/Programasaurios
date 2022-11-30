@@ -63,16 +63,6 @@ const Configuration = ({
                     //cuando la perra de manuel implemente la hpta base de datos, aqui se debe de poner el email del usuario
                     />
 
-                    <Text style={configurationStyle.label}>Número</Text>
-                    <TextInput
-                        style={configurationStyle.input}
-                        placeholder='...'
-                        placeholderTextColor={'#000'}
-
-                    //value={number}
-                    //onChangeText={(text) => setNumber(text)}
-                    //cuando la perra de manuel implemente la hpta base de datos, aqui se debe de poner el numero del usuario
-                    />
 
                     <Text style={configurationStyle.label}>Divisa</Text>
                     <View style={configurationStyle.picker}>

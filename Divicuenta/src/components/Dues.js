@@ -8,7 +8,7 @@ const iconos = {
     Debo: require('../img/deben.jpg'),
 }
 const Gasto = ({gasto, setModal, setGasto}) => {
-  const {user, amount , type} = gasto;
+  const {userId, amount, userName } = gasto;
   const handleAcciones = () => {
     setModal(true);
     setGasto(gasto);  
@@ -20,12 +20,11 @@ const Gasto = ({gasto, setModal, setGasto}) => {
                 <View style={styles.imageContainer}>
                 <Image
                     style={styles.image}
-                    source={iconos[type]}
+                    source={iconos[Math.random() < 0.5 ? 'Deben' : 'Debo']}
                 />       
                          
                     <View style={styles.infoContainer}> 
-                            <Text style={styles.categoria}>{user}</Text>
-                            <Text style={styles.nombre}>{type}</Text>
+                            <Text style={styles.categoria}>{userName}</Text>
                             <Text style={styles.label}>{formatearCantidad(amount)}</Text>
                          
                     </View>
@@ -33,11 +32,10 @@ const Gasto = ({gasto, setModal, setGasto}) => {
                         <Pressable
                             style={styles.boton}
                         >
-                            <Text style={styles.texto}>{gasto.type=='Deben'?'Cobrar' : 'Pagar'}</Text>
+                            <Text style={styles.texto}>{gasto.userId=='Deben'?'Cobrar' : 'Pagar'}</Text>
                         </Pressable>
                     </View>
-                </View>
-                
+                </View>        
             </View>
         </View>
     
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
     },
 
     label: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: 'bold',
         color: '#000',
         marginBottom: 5,

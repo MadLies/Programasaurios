@@ -7,12 +7,18 @@ import DueList from './DueList'
 
 const Due = ({
   setDeuda,
+  debs,
+  recibes,
+
 
 }) => {
   const [filtro, setFiltro] = React.useState('')
-  const [gastos, setGastos] = React.useState([{ id: 1, user: 'Casa', amount: 1000,  type: 'Deben' }, { id: 2, user: 'Mamá', amount: 2000,  type: 'Debo' }])
+  const [gastos, setGastos] = React.useState([...debs, ...recibes])
+  
   const [gastosFiltrados, setGastosFiltrados] = React.useState([])
   
+  console.log(gastos)
+
   return (
     <View style={dueStyle.container}>
       <Image
@@ -37,6 +43,9 @@ const Due = ({
           setFiltro={setFiltro}
           gastos={gastos}
           setGastosFiltrados={setGastosFiltrados}
+          debs={debs}
+          recibes={recibes}
+          gastosFiltrados={gastosFiltrados}
         />
 
         <DueList

@@ -7,6 +7,7 @@ import Configuration from './Configuration';
 import NewBill from './NewBill';
 import Stats from './Stats';
 import Due from './Due';
+import Friend from './Friend';
 
 const Menu = ({
     modalLogin,
@@ -19,7 +20,28 @@ const Menu = ({
     const [bill, setBill] = useState([])
     const [stat, setStat] = useState(false)
     const [deuda, setDeuda] = useState(false)
+    const [friend, setFriend] = useState(false)
+    const [debs,setDebs ] = useState([])
+    const [recibes,setRecibes ] = useState([])
 
+
+    const viewDebs = () => {
+    fetch("https://2e96-186-28-28-42.ngrok.io/v1/users/300547865/debts")
+    .then((res) => res.json())
+    .then(resJson => {
+      console.log(resJson.people)
+      setDebs(resJson.people)
+    }).catch(e=>{console.log(e)})
+  }
+
+  const viewRecibes  = () => {
+    fetch("https://2e96-186-28-28-42.ngrok.io/v1/users/300547865/receive")
+    .then((res) => res.json())
+    .then(resJson => {
+      console.log(resJson.people)
+        setRecibes(resJson.people)
+    }).catch(e=>{console.log(e)})
+  }
 
     const handleLogin = () => {
         Alert.alert(
@@ -80,7 +102,7 @@ const Menu = ({
 
                 <Pressable
                     style={[styles.button, styles.btnFriend]}
-                    onPress={() => setModalLogin(false)}
+                    onPress={() => setFriend(true)}
                 >
                     <Image
                         style={styles.image}
@@ -102,7 +124,10 @@ const Menu = ({
 
                 <Pressable
                     style={[styles.button, styles.btnDeu]}
-                    onPress={() => setDeuda(true)}
+                    onPress={() =>{ 
+                        viewDebs()
+                        viewRecibes()
+                        setDeuda(true)}}
                 >
                     <Image
                         style={styles.image}
@@ -150,6 +175,18 @@ const Menu = ({
 
             <Modal
                 animationType="slide"
+                visible={friend}
+                onRequestClose={() => {
+                    setFriend(false)
+                }}
+            >
+                <Friend
+                    setFriend={setFriend}
+                />
+            </Modal>
+
+            <Modal
+                animationType="slide"
                 visible={deuda}
                 onRequestClose={() => {
                     setDeuda(false)
@@ -158,6 +195,8 @@ const Menu = ({
             
                 <Due
                     setDeuda={setDeuda}
+                    debs={debs}
+                    recibes={recibes}
                 />
 
 
