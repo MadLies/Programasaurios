@@ -28,7 +28,7 @@ public class LoginResource {
     @Timed
     @Path("/{user}")
     public LoginDto login(@PathParam("user") String user){ 
-        return new LoginDto("3004113699", "estoesunaprueba");
+        return new LoginDto("1234567890", "rawr");
     }
     
 }
