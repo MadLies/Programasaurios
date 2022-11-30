@@ -1,6 +1,8 @@
 package resources;
 
 import dto.ExtractoDto;
+import dto.FriendDto;
+import dto.FriendTuple;
 import dto.PeopleTuple;
 import java.time.Clock;
 import java.util.List;
@@ -42,4 +44,14 @@ public class UserResource {
         return new ExtractoDto(personas, 200000);
     }
     
+    @GET
+    @Path("/{user}/friends")
+    public FriendDto friend(@PathParam("user") String user){
+        FriendTuple amigo = new FriendTuple("3005701146", "Trucha", false );
+        FriendTuple amigo1 = new FriendTuple("3005701146", "Mano", true );
+        FriendTuple amigo2 = new FriendTuple("3005701146", "Pooh", false );
+        FriendTuple amigo3 = new FriendTuple("3005701146", "Rosita", false );
+        List<FriendTuple> amigos = List.of(amigo, amigo1, amigo2, amigo3);
+        return new FriendDto(amigos);
+    }    
 }
