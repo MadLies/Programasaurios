@@ -73,7 +73,7 @@ public class Usuario implements Serializable {
     
     
 
-    public Usuario(int Id, String name, String nickname, String pais, String divisa, String email, String contrasena) {
+    public Usuario(double Id, String name, String nickname, String pais, String divisa, String email, String contrasena) {
         this.Id = Id;
         this.name = name;
         this.nickname = nickname;

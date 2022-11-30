@@ -52,6 +52,30 @@ public class Grupo implements Serializable{
         this.IdGrupo = IDGrupo;
     }
 
+    public int getIdGrupo() {
+        return IdGrupo;
+    }
+
+    public void setIdGrupo(int IdGrupo) {
+        this.IdGrupo = IdGrupo;
+    }
+
+    public List<UsuarioDelGrupo> getIntegrantes() {
+        return Integrantes;
+    }
+
+    public void setIntegrantes(List<UsuarioDelGrupo> Integrantes) {
+        this.Integrantes = Integrantes;
+    }
+
+    public List<Cuenta> getCuentas() {
+        return Cuentas;
+    }
+
+    public void setCuentas(List<Cuenta> Cuentas) {
+        this.Cuentas = Cuentas;
+    }
+
     public String getNombreDelGrupo() {
         return NombreDelGrupo;
     }
