@@ -5,70 +5,98 @@
 package modelo;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
- * @author venus
+ * @author Manuel Martinez
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Notificacion.findAll", query = "SELECT n FROM Notificacion n"),
-    @NamedQuery(name = "Notificacion.findByIdNotificacion", query = "SELECT n FROM Notificacion n WHERE n.idNotificacion = :idNotificacion"),
-    @NamedQuery(name = "Notificacion.findByEstado", query = "SELECT n FROM Notificacion n WHERE n.estado = :estado"),
-    @NamedQuery(name = "Notificacion.findByMensaje", query = "SELECT n FROM Notificacion n WHERE n.mensaje = :mensaje")})
-public class Notificacion implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Table(name = "Notificacion")
+public class Notificacion implements Serializable{
+    
+    
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    private Integer idNotificacion;
-    @Basic(optional = false)
-    private String estado;
-    @Basic(optional = false)
-    private String mensaje;
-    @JoinColumn(name = "idCuenta", referencedColumnName = "idCuenta")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Cuenta idCuenta;
-    @JoinColumn(name = "idPago", referencedColumnName = "idPago")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Pago idPago;
-    @JoinColumn(name = "usuarioGenera", referencedColumnName = "celular")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Usuario usuarioGenera;
-    @JoinColumn(name = "usuarioRecibe", referencedColumnName = "celular")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @Column(name = "idNotificacion")
+    private int idNotificacion;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idCuenta")
+    private Cuenta cuenta;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idPago")
+    private Pago pago;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "celular")
+    private Usuario UsuarioGenera;
+    
     private Usuario usuarioRecibe;
+   
+    @Column(name = "estado")
+    private String estado;
+ 
+    @Column(name = "mensaje")
+    private String mensaje;
 
-    public Notificacion() {
-    }
-
-    public Notificacion(Integer idNotificacion) {
+    public Notificacion(int idNotificacion, Cuenta cuenta, Pago pago, Usuario UsuarioGenera, Usuario usuarioRecibe, String estado, String mensaje) {
         this.idNotificacion = idNotificacion;
-    }
-
-    public Notificacion(Integer idNotificacion, String estado, String mensaje) {
-        this.idNotificacion = idNotificacion;
+        this.cuenta = cuenta;
+        this.pago = pago;
+        this.UsuarioGenera = UsuarioGenera;
+        this.usuarioRecibe = usuarioRecibe;
         this.estado = estado;
         this.mensaje = mensaje;
     }
 
-    public Integer getIdNotificacion() {
+    public int getIdNotificacion() {
         return idNotificacion;
     }
 
-    public void setIdNotificacion(Integer idNotificacion) {
+    public void setIdNotificacion(int idNotificacion) {
         this.idNotificacion = idNotificacion;
+    }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    public Pago getPago() {
+        return pago;
+    }
+
+    public void setPago(Pago pago) {
+        this.pago = pago;
+    }
+
+    public Usuario getUsuarioGenera() {
+        return UsuarioGenera;
+    }
+
+    public void setUsuarioGenera(Usuario UsuarioGenera) {
+        this.UsuarioGenera = UsuarioGenera;
+    }
+
+    public Usuario getUsuarioRecibe() {
+        return usuarioRecibe;
+    }
+
+    public void setUsuarioRecibe(Usuario usuarioRecibe) {
+        this.usuarioRecibe = usuarioRecibe;
     }
 
     public String getEstado() {
@@ -87,61 +115,58 @@ public class Notificacion implements Serializable {
         this.mensaje = mensaje;
     }
 
-    public Cuenta getIdCuenta() {
-        return idCuenta;
-    }
-
-    public void setIdCuenta(Cuenta idCuenta) {
-        this.idCuenta = idCuenta;
-    }
-
-    public Pago getIdPago() {
-        return idPago;
-    }
-
-    public void setIdPago(Pago idPago) {
-        this.idPago = idPago;
-    }
-
-    public Usuario getUsuarioGenera() {
-        return usuarioGenera;
-    }
-
-    public void setUsuarioGenera(Usuario usuarioGenera) {
-        this.usuarioGenera = usuarioGenera;
-    }
-
-    public Usuario getUsuarioRecibe() {
-        return usuarioRecibe;
-    }
-
-    public void setUsuarioRecibe(Usuario usuarioRecibe) {
-        this.usuarioRecibe = usuarioRecibe;
+    @Override
+    public String toString() {
+        return "Notificacion{" + "idNotificacion=" + idNotificacion + ", cuenta=" + cuenta + ", pago=" + pago + ", UsuarioGenera=" + UsuarioGenera + ", usuarioRecibe=" + usuarioRecibe + ", estado=" + estado + ", mensaje=" + mensaje + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idNotificacion != null ? idNotificacion.hashCode() : 0);
+        int hash = 7;
+        hash = 17 * hash + this.idNotificacion;
+        hash = 17 * hash + Objects.hashCode(this.cuenta);
+        hash = 17 * hash + Objects.hashCode(this.pago);
+        hash = 17 * hash + Objects.hashCode(this.UsuarioGenera);
+        hash = 17 * hash + Objects.hashCode(this.usuarioRecibe);
+        hash = 17 * hash + Objects.hashCode(this.estado);
+        hash = 17 * hash + Objects.hashCode(this.mensaje);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Notificacion)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Notificacion other = (Notificacion) object;
-        if ((this.idNotificacion == null && other.idNotificacion != null) || (this.idNotificacion != null && !this.idNotificacion.equals(other.idNotificacion))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Notificacion other = (Notificacion) obj;
+        if (this.idNotificacion != other.idNotificacion) {
+            return false;
+        }
+        if (!Objects.equals(this.estado, other.estado)) {
+            return false;
+        }
+        if (!Objects.equals(this.mensaje, other.mensaje)) {
+            return false;
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.pago, other.pago)) {
+            return false;
+        }
+        if (!Objects.equals(this.UsuarioGenera, other.UsuarioGenera)) {
+            return false;
+        }
+        return Objects.equals(this.usuarioRecibe, other.usuarioRecibe);
     }
-
-    @Override
-    public String toString() {
-        return "divicuentas.Notificacion[ idNotificacion=" + idNotificacion + " ]";
-    }
+    
+    
+    
     
 }

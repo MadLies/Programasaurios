@@ -1,45 +1,126 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package modelo;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import lombok.Data;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
- * @author venus
+ * @author CrookedSpecs
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Amigo.findAll", query = "SELECT a FROM Amigo a"),
-    @NamedQuery(name = "Amigo.findByIdAmigo", query = "SELECT a FROM Amigo a WHERE a.idAmigo = :idAmigo"),
-    @NamedQuery(name = "Amigo.findByFavorito", query = "SELECT a FROM Amigo a WHERE a.favorito = :favorito")})
-@Data
+@Table(name = "amigo")
 public class Amigo implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
+    @Column(name = "idAmigo")
     private Integer idAmigo;
+    @Column(name = "favorito")
     private Short favorito;
-    @JoinColumn(name = "usuario", referencedColumnName = "celular")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "celular")
     private Usuario usuario;
-    @JoinColumn(name = "amigo", referencedColumnName = "celular")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    
+    @Column(name = "amigo")
     private Usuario amigo;
 
+    
+    @Override
+    public String toString() {
+        return "Amigo{" + "idAmigo=" + idAmigo + ", favorito=" + favorito + ", usuario=" + usuario + ", amigo=" + amigo + '}';
+    }
+    
     public Amigo() {
     }
 
-    public Amigo(Integer idAmigo) {
+    public Integer getIdAmigo() {
+        return idAmigo;
+    }
+
+    public void setIdAmigo(Integer idAmigo) {
         this.idAmigo = idAmigo;
     }
+
+    public Short getFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(Short favorito) {
+        this.favorito = favorito;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Usuario getAmigo() {
+        return amigo;
+    }
+
+    public void setAmigo(Usuario amigo) {
+        this.amigo = amigo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.idAmigo);
+        hash = 83 * hash + Objects.hashCode(this.favorito);
+        hash = 83 * hash + Objects.hashCode(this.usuario);
+        hash = 83 * hash + Objects.hashCode(this.amigo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Amigo other = (Amigo) obj;
+        if (!Objects.equals(this.idAmigo, other.idAmigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.favorito, other.favorito)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        return Objects.equals(this.amigo, other.amigo);
+    }
+
+    public Amigo(Integer idAmigo, Short favorito, Usuario usuario, Usuario amigo) {
+        this.idAmigo = idAmigo;
+        this.favorito = favorito;
+        this.usuario = usuario;
+        this.amigo = amigo;
+    }
+
     
 }
+    

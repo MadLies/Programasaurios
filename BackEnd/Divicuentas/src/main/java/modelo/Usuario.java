@@ -5,81 +5,98 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
- * @author venus
+ * @author Manuel Martinez
  */
+
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByCelular", query = "SELECT u FROM Usuario u WHERE u.celular = :celular"),
-    @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
-    @NamedQuery(name = "Usuario.findByNickname", query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname"),
-    @NamedQuery(name = "Usuario.findByPais", query = "SELECT u FROM Usuario u WHERE u.pais = :pais"),
-    @NamedQuery(name = "Usuario.findByDivisa", query = "SELECT u FROM Usuario u WHERE u.divisa = :divisa"),
-    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findByContrase\u00f1a", query = "SELECT u FROM Usuario u WHERE u.contrase\u00f1a = :contrase\u00f1a")})
+@Table(name = "Usuario")
 public class Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersion = 1L;
+    
     @Id
-    @Basic(optional = false)
-    private Integer celular;
-    private String nombre;
+    @Column(name = "celular")
+    private double Id;
+    @Column(name = "nombre")
+    private String name;
+    @Column(name = "nickname")
     private String nickname;
+    @Column(name = "pais")
     private String pais;
+    @Column(name = "divisa")
     private String divisa;
+    @Column(name = "email")
     private String email;
-    private String contraseña;
-    @ManyToMany(mappedBy = "usuarioCollection", fetch = FetchType.EAGER)
-    private Collection<Grupo> grupoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.EAGER)
-    private Collection<Integrantecuenta> integrantecuentaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioSalida", fetch = FetchType.EAGER)
-    private Collection<Transaccion> transaccionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioLlegada", fetch = FetchType.EAGER)
-    private Collection<Transaccion> transaccionCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioGenera", fetch = FetchType.EAGER)
-    private Collection<Notificacion> notificacionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioRecibe", fetch = FetchType.EAGER)
-    private Collection<Notificacion> notificacionCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.EAGER)
-    private Collection<Amigo> amigoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "amigo", fetch = FetchType.EAGER)
-    private Collection<Amigo> amigoCollection1;
+    @Column(name = "contraseña")
+    private String contrasena;
+    
+    
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Amigo> MisAmigos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "UsuarioGrupo", cascade = CascadeType.ALL)
+    private List<UsuarioDelGrupo> MisGrupos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "IntegranteCuenta", cascade = CascadeType.ALL)
+    private List<IntegranteCuenta> MisCuentas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "idTransaccion", cascade = CascadeType.ALL)
+    private List<Transaccion> MisSalidas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "idTransaccion", cascade = CascadeType.ALL)
+    private List<Transaccion> MisEntradas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "idNotificacion", cascade = CascadeType.ALL)
+    private List<Notificacion> MisGenerados = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "idNotificacion", cascade = CascadeType.ALL)
+    private List<Notificacion> MisRecibidos = new ArrayList<>();
+    
+    
 
-    public Usuario() {
+    public Usuario(int Id, String name, String nickname, String pais, String divisa, String email, String contrasena) {
+        this.Id = Id;
+        this.name = name;
+        this.nickname = nickname;
+        this.pais = pais;
+        this.divisa = divisa;
+        this.email = email;
+        this.contrasena = contrasena;
     }
 
-    public Usuario(Integer celular) {
-        this.celular = celular;
+    public double getId() {
+        return Id;
     }
 
-    public Integer getCelular() {
-        return celular;
+    public void setId(double Id) {
+        this.Id = Id;
     }
 
-    public void setCelular(Integer celular) {
-        this.celular = celular;
+    public String getName() {
+        return name;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNickname() {
@@ -114,101 +131,152 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public Collection<Grupo> getGrupoCollection() {
-        return grupoCollection;
+
+
+    public List<Amigo> getMisAmigos() {
+        return MisAmigos;
     }
 
-    public void setGrupoCollection(Collection<Grupo> grupoCollection) {
-        this.grupoCollection = grupoCollection;
+    public void setMisAmigos(List<Amigo> MisAmigos) {
+        this.MisAmigos = MisAmigos;
     }
 
-    public Collection<Integrantecuenta> getIntegrantecuentaCollection() {
-        return integrantecuentaCollection;
+    public List<UsuarioDelGrupo> getMisGrupos() {
+        return MisGrupos;
     }
 
-    public void setIntegrantecuentaCollection(Collection<Integrantecuenta> integrantecuentaCollection) {
-        this.integrantecuentaCollection = integrantecuentaCollection;
+    public void setMisGrupos(List<UsuarioDelGrupo> MisGrupos) {
+        this.MisGrupos = MisGrupos;
     }
 
-    public Collection<Transaccion> getTransaccionCollection() {
-        return transaccionCollection;
+    public List<IntegranteCuenta> getMisCuentas() {
+        return MisCuentas;
     }
 
-    public void setTransaccionCollection(Collection<Transaccion> transaccionCollection) {
-        this.transaccionCollection = transaccionCollection;
+    public void setMisCuentas(List<IntegranteCuenta> MisCuentas) {
+        this.MisCuentas = MisCuentas;
     }
 
-    public Collection<Transaccion> getTransaccionCollection1() {
-        return transaccionCollection1;
+    public List<Transaccion> getMisSalidas() {
+        return MisSalidas;
     }
 
-    public void setTransaccionCollection1(Collection<Transaccion> transaccionCollection1) {
-        this.transaccionCollection1 = transaccionCollection1;
+    public void setMisSalidas(List<Transaccion> MisSalidas) {
+        this.MisSalidas = MisSalidas;
     }
 
-    public Collection<Notificacion> getNotificacionCollection() {
-        return notificacionCollection;
+    public List<Transaccion> getMisEntradas() {
+        return MisEntradas;
     }
 
-    public void setNotificacionCollection(Collection<Notificacion> notificacionCollection) {
-        this.notificacionCollection = notificacionCollection;
+    public void setMisEntradas(List<Transaccion> MisEntradas) {
+        this.MisEntradas = MisEntradas;
     }
 
-    public Collection<Notificacion> getNotificacionCollection1() {
-        return notificacionCollection1;
+    public List<Notificacion> getMisGenerados() {
+        return MisGenerados;
     }
 
-    public void setNotificacionCollection1(Collection<Notificacion> notificacionCollection1) {
-        this.notificacionCollection1 = notificacionCollection1;
+    public void setMisGenerados(List<Notificacion> MisGenerados) {
+        this.MisGenerados = MisGenerados;
     }
 
-    public Collection<Amigo> getAmigoCollection() {
-        return amigoCollection;
+    public List<Notificacion> getMisRecibidos() {
+        return MisRecibidos;
     }
 
-    public void setAmigoCollection(Collection<Amigo> amigoCollection) {
-        this.amigoCollection = amigoCollection;
-    }
-
-    public Collection<Amigo> getAmigoCollection1() {
-        return amigoCollection1;
-    }
-
-    public void setAmigoCollection1(Collection<Amigo> amigoCollection1) {
-        this.amigoCollection1 = amigoCollection1;
+    public void setMisRecibidos(List<Notificacion> MisRecibidos) {
+        this.MisRecibidos = MisRecibidos;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (celular != null ? celular.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Usuario other = (Usuario) object;
-        if ((this.celular == null && other.celular != null) || (this.celular != null && !this.celular.equals(other.celular))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Usuario other = (Usuario) obj;
+        if (this.Id != other.Id) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.nickname, other.nickname)) {
+            return false;
+        }
+        if (!Objects.equals(this.pais, other.pais)) {
+            return false;
+        }
+        if (!Objects.equals(this.divisa, other.divisa)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.contrasena, other.contrasena)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisAmigos, other.MisAmigos)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisGrupos, other.MisGrupos)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisCuentas, other.MisCuentas)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisSalidas, other.MisSalidas)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisEntradas, other.MisEntradas)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisGenerados, other.MisGenerados)) {
+            return false;
+        }
+        return Objects.equals(this.MisRecibidos, other.MisRecibidos);
     }
 
     @Override
     public String toString() {
-        return "divicuentas.Usuario[ celular=" + celular + " ]";
+        return "Usuario{" + "Id=" + Id + ", name=" + name + ", nickname=" + nickname + ", pais=" + pais + ", divisa=" + divisa + ", email=" + email + ", contrasena=" + contrasena + ", MisAmigos=" + MisAmigos + ", MisGrupos=" + MisGrupos + ", MisCuentas=" + MisCuentas + ", MisSalidas=" + MisSalidas + ", MisEntradas=" + MisEntradas + ", MisGenerados=" + MisGenerados + ", MisRecibidos=" + MisRecibidos + '}';
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.Id) ^ (Double.doubleToLongBits(this.Id) >>> 32));
+        hash = 23 * hash + Objects.hashCode(this.name);
+        hash = 23 * hash + Objects.hashCode(this.nickname);
+        hash = 23 * hash + Objects.hashCode(this.pais);
+        hash = 23 * hash + Objects.hashCode(this.divisa);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + Objects.hashCode(this.contrasena);
+        hash = 23 * hash + Objects.hashCode(this.MisAmigos);
+        hash = 23 * hash + Objects.hashCode(this.MisGrupos);
+        hash = 23 * hash + Objects.hashCode(this.MisCuentas);
+        hash = 23 * hash + Objects.hashCode(this.MisSalidas);
+        hash = 23 * hash + Objects.hashCode(this.MisEntradas);
+        hash = 23 * hash + Objects.hashCode(this.MisGenerados);
+        hash = 23 * hash + Objects.hashCode(this.MisRecibidos);
+        return hash;
+    }
+
+    
+   
     
 }
