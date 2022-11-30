@@ -152,18 +152,17 @@ public class Cuenta implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + this.idCuenta;
-        hash = 23 * hash + Objects.hashCode(this.nombreCuenta);
-        hash = 23 * hash + Objects.hashCode(this.fechaCuenta);
-        hash = 23 * hash + Float.floatToIntBits(this.totalCuenta);
-        hash = 23 * hash + Objects.hashCode(this.divisaCuenta);
-        hash = 23 * hash + Objects.hashCode(this.tipoActividad);
-        hash = 23 * hash + Objects.hashCode(this.MisCuentas);
-        hash = 23 * hash + Objects.hashCode(this.MisGenerados);
-        hash = 23 * hash + Objects.hashCode(this.MisRecibidos);
-        hash = 23 * hash + Objects.hashCode(this.MisNotificaciones);
-        hash = 23 * hash + Objects.hashCode(this.IdGrupo);
+        int hash = 7;
+        hash = 13 * hash + this.idCuenta;
+        hash = 13 * hash + Objects.hashCode(this.nombreCuenta);
+        hash = 13 * hash + Objects.hashCode(this.fechaCuenta);
+        hash = 13 * hash + Float.floatToIntBits(this.totalCuenta);
+        hash = 13 * hash + Objects.hashCode(this.divisaCuenta);
+        hash = 13 * hash + Objects.hashCode(this.tipoActividad);
+        hash = 13 * hash + Objects.hashCode(this.MisGenerados);
+        hash = 13 * hash + Objects.hashCode(this.MisRecibidos);
+        hash = 13 * hash + Objects.hashCode(this.MisNotificaciones);
+        hash = 13 * hash + Objects.hashCode(this.IdGrupo);
         return hash;
     }
 
@@ -197,9 +196,6 @@ public class Cuenta implements Serializable{
         if (!Objects.equals(this.fechaCuenta, other.fechaCuenta)) {
             return false;
         }
-        if (!Objects.equals(this.MisCuentas, other.MisCuentas)) {
-            return false;
-        }
         if (!Objects.equals(this.MisGenerados, other.MisGenerados)) {
             return false;
         }
@@ -211,6 +207,10 @@ public class Cuenta implements Serializable{
         }
         return Objects.equals(this.IdGrupo, other.IdGrupo);
     }
+
+
+
+    
 
     public Cuenta(int idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta, String divisaCuenta, String tipoActividad, Grupo IdGrupo) {
         this.idCuenta = idCuenta;
