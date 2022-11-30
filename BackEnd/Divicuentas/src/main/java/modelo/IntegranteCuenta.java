@@ -36,9 +36,9 @@ public class IntegranteCuenta implements Serializable{
     private Usuario usuario;
 
     @Column(name = "valorPagar")
-    int valorPagar;
+    double valorPagar;
     @Column(name = "abonado")
-    int abonado;
+    double abonado;
 
     @Override
     public String toString() {
@@ -69,15 +69,15 @@ public class IntegranteCuenta implements Serializable{
         this.usuario = usuario;
     }
 
-    public int getValorPagar() {
+    public double getValorPagar() {
         return valorPagar;
     }
 
-    public void setValorPagar(int valorPagar) {
+    public void setValorPagar(double valorPagar) {
         this.valorPagar = valorPagar;
     }
 
-    public int getAbonado() {
+    public double getAbonado() {
         return abonado;
     }
 
@@ -85,7 +85,7 @@ public class IntegranteCuenta implements Serializable{
         this.abonado = abonado;
     }
 
-    public IntegranteCuenta(int IntegranteCuenta, Cuenta cuenta, Usuario usuario, int valorPagar, int abonado) {
+    public IntegranteCuenta(int IntegranteCuenta, Cuenta cuenta, Usuario usuario, double valorPagar, double abonado) {
         this.IntegranteCuenta = IntegranteCuenta;
         this.cuenta = cuenta;
         this.usuario = usuario;
@@ -95,14 +95,16 @@ public class IntegranteCuenta implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 13 * hash + this.IntegranteCuenta;
-        hash = 13 * hash + Objects.hashCode(this.cuenta);
-        hash = 13 * hash + Objects.hashCode(this.usuario);
-        hash = 13 * hash + this.valorPagar;
-        hash = 13 * hash + this.abonado;
+        int hash = 3;
+        hash = 53 * hash + this.IntegranteCuenta;
+        hash = 53 * hash + Objects.hashCode(this.cuenta);
+        hash = 53 * hash + Objects.hashCode(this.usuario);
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.valorPagar) ^ (Double.doubleToLongBits(this.valorPagar) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.abonado) ^ (Double.doubleToLongBits(this.abonado) >>> 32));
         return hash;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {

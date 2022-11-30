@@ -42,7 +42,7 @@ public class Cuenta implements Serializable{
     String tipoActividad;
     
     @OneToMany(mappedBy = "IntegranteCuenta", cascade = CascadeType.ALL)
-    private List<IntegranteCuenta> MisCuentas = new ArrayList<>();
+    private List<IntegranteCuenta> MisIntegranteCuentas = new ArrayList<>();
     
     @OneToMany(mappedBy = "idTransaccion", cascade = CascadeType.ALL)
     private List<Transaccion> MisGenerados = new ArrayList<>();
@@ -55,7 +55,7 @@ public class Cuenta implements Serializable{
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdGrupo")
-    private Usuario IdGrupo;
+    private Grupo IdGrupo;
 
     @Override
     public String toString() {
@@ -64,6 +64,38 @@ public class Cuenta implements Serializable{
 
     public int getIdCuenta() {
         return idCuenta;
+    }
+
+    public List<IntegranteCuenta> getMisIntegranteCuentas() {
+        return MisIntegranteCuentas;
+    }
+
+    public void setMisIntegranteCuentas(List<IntegranteCuenta> MisIntegranteCuentas) {
+        this.MisIntegranteCuentas = MisIntegranteCuentas;
+    }
+
+    public List<Transaccion> getMisGenerados() {
+        return MisGenerados;
+    }
+
+    public void setMisGenerados(List<Transaccion> MisGenerados) {
+        this.MisGenerados = MisGenerados;
+    }
+
+    public List<Transaccion> getMisRecibidos() {
+        return MisRecibidos;
+    }
+
+    public void setMisRecibidos(List<Transaccion> MisRecibidos) {
+        this.MisRecibidos = MisRecibidos;
+    }
+
+    public List<Notificacion> getMisNotificaciones() {
+        return MisNotificaciones;
+    }
+
+    public void setMisNotificaciones(List<Notificacion> MisNotificaciones) {
+        this.MisNotificaciones = MisNotificaciones;
     }
 
     public void setIdCuenta(int idCuenta) {
@@ -110,28 +142,27 @@ public class Cuenta implements Serializable{
         this.tipoActividad = tipoActividad;
     }
 
-    public Usuario getIdGrupo() {
+    public Grupo getIdGrupo() {
         return IdGrupo;
     }
 
-    public void setIdGrupo(Usuario IdGrupo) {
+    public void setIdGrupo(Grupo IdGrupo) {
         this.IdGrupo = IdGrupo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + this.idCuenta;
-        hash = 23 * hash + Objects.hashCode(this.nombreCuenta);
-        hash = 23 * hash + Objects.hashCode(this.fechaCuenta);
-        hash = 23 * hash + Float.floatToIntBits(this.totalCuenta);
-        hash = 23 * hash + Objects.hashCode(this.divisaCuenta);
-        hash = 23 * hash + Objects.hashCode(this.tipoActividad);
-        hash = 23 * hash + Objects.hashCode(this.MisCuentas);
-        hash = 23 * hash + Objects.hashCode(this.MisGenerados);
-        hash = 23 * hash + Objects.hashCode(this.MisRecibidos);
-        hash = 23 * hash + Objects.hashCode(this.MisNotificaciones);
-        hash = 23 * hash + Objects.hashCode(this.IdGrupo);
+        int hash = 7;
+        hash = 13 * hash + this.idCuenta;
+        hash = 13 * hash + Objects.hashCode(this.nombreCuenta);
+        hash = 13 * hash + Objects.hashCode(this.fechaCuenta);
+        hash = 13 * hash + Float.floatToIntBits(this.totalCuenta);
+        hash = 13 * hash + Objects.hashCode(this.divisaCuenta);
+        hash = 13 * hash + Objects.hashCode(this.tipoActividad);
+        hash = 13 * hash + Objects.hashCode(this.MisGenerados);
+        hash = 13 * hash + Objects.hashCode(this.MisRecibidos);
+        hash = 13 * hash + Objects.hashCode(this.MisNotificaciones);
+        hash = 13 * hash + Objects.hashCode(this.IdGrupo);
         return hash;
     }
 
@@ -165,9 +196,6 @@ public class Cuenta implements Serializable{
         if (!Objects.equals(this.fechaCuenta, other.fechaCuenta)) {
             return false;
         }
-        if (!Objects.equals(this.MisCuentas, other.MisCuentas)) {
-            return false;
-        }
         if (!Objects.equals(this.MisGenerados, other.MisGenerados)) {
             return false;
         }
@@ -180,7 +208,11 @@ public class Cuenta implements Serializable{
         return Objects.equals(this.IdGrupo, other.IdGrupo);
     }
 
-    public Cuenta(int idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta, String divisaCuenta, String tipoActividad, Usuario IdGrupo) {
+
+
+    
+
+    public Cuenta(int idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta, String divisaCuenta, String tipoActividad, Grupo IdGrupo) {
         this.idCuenta = idCuenta;
         this.nombreCuenta = nombreCuenta;
         this.fechaCuenta = fechaCuenta;
