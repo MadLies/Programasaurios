@@ -15,5 +15,6 @@ public class ExtractoDto {
     private List<PeopleTuple> people;
     @JsonProperty
     private int total;
+    private String type;
     
 }
