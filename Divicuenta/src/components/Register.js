@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Modal, ScrollView, Pressable , StyleSheet , TextInput, Image, Alert} from 'react-native'
 import { registerStyle as styles } from '../styles/RegisterStyle';
 import { Picker } from '@react-native-picker/picker';
+import { serverUrl } from '../helper';
 
 const Register = ({
 modalRegister,
@@ -50,7 +51,7 @@ setModalRegister,
         "password": password
       }
       const userAction = async () => {
-        const response = await fetch('https://2e96-186-28-28-42.ngrok.io/v1/register', {
+        const response = await fetch(`${serverUrl}/v1/register`, {
           method: 'POST',
           body: JSON.stringify(user),
           headers: {

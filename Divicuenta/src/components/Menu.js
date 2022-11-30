@@ -8,10 +8,12 @@ import NewBill from './NewBill';
 import Stats from './Stats';
 import Due from './Due';
 import Friend from './Friend';
+import { serverUrl } from '../helper';
 
 const Menu = ({
     modalLogin,
     setModalLogin,
+    number
 }) => {
 
     const [closeSession, setCloseSession] = React.useState(false);
@@ -26,7 +28,7 @@ const Menu = ({
 
 
     const viewDebs = () => {
-    fetch("https://2e96-186-28-28-42.ngrok.io/v1/users/300547865/debts")
+    fetch(`${serverUrl}/v1/users/300547865/debts`)
     .then((res) => res.json())
     .then(resJson => {
       console.log(resJson.people)
@@ -35,7 +37,7 @@ const Menu = ({
   }
 
   const viewRecibes  = () => {
-    fetch("https://2e96-186-28-28-42.ngrok.io/v1/users/300547865/receive")
+    fetch(`${serverUrl}/v1/users/300547865/receive`)
     .then((res) => res.json())
     .then(resJson => {
       console.log(resJson.people)
@@ -182,6 +184,7 @@ const Menu = ({
             >
                 <Friend
                     setFriend={setFriend}
+                    number={number}
                 />
             </Modal>
 

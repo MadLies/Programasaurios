@@ -20,3 +20,5 @@ export const formatearFecha = (fecha) => {
     });
     
 }
+
+export const serverUrl = 'https://94dd-186-28-28-42.ngrok.io';

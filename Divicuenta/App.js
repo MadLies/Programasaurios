@@ -29,6 +29,7 @@ import Menu from './src/components/Menu';
 import AppStyle from './src/styles/AppStyle.js'
 import { appStyle as styles } from './src/styles/AppStyle.js'
 import playRoar from './src/functions/PlayRoar';
+import { serverUrl } from './src/helper';
 
 const App = () => {
   const [modalLogin, setModalLogin] = useState(false);
@@ -39,7 +40,7 @@ const App = () => {
 
   const checkId = (number, password) => {
     if (number.length === 10) {
-      const url = 'https://2e96-186-28-28-42.ngrok.io/v1/login/'+number;
+      const url = `${serverUrl}/v1/login/${number}`;
       fetch(url)
       .then((res) => res.json())
       .then(resJson => {
@@ -160,6 +161,7 @@ const App = () => {
           <Menu
             modalLogin={modalLogin}
             setModalLogin={setModalLogin}
+            number={number}
           />
         </Modal>
 

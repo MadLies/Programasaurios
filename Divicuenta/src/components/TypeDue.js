@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { Text, View, StyleSheet, Pressable, Image } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
+import { proc } from 'react-native-reanimated';
 
 
 const typeDue = ({
@@ -13,19 +14,23 @@ const typeDue = ({
     recibes,
     gastosFiltrados
 }) => {
-  useEffect(() => {
-  if(filtro === '') {
-    setGastosFiltrados(gastos)
-  }else{
-    if (filtro === 'Debes') {
-    setGastosFiltrados(debs)
-    console.log(gastosFiltrados)
-}
-if (filtro === 'Recibes') {
-    setGastosFiltrados(recibes)
-    console.log(gastosFiltrados)
-}}
-},[filtro])  
+
+    const processFilter = () => {
+        if(filtro === '') {
+            setGastosFiltrados(gastos)
+        }else if (filtro === 'Debes') {
+            setGastosFiltrados(debs)
+            console.log(gastosFiltrados)
+        }
+        else if (filtro === 'Recibes') {
+            setGastosFiltrados(recibes)
+            console.log(gastosFiltrados)
+        }
+    };
+    processFilter();
+    useEffect(() => {
+        processFilter();
+    },[]);  
   return (
     <View style={styles.container}>
     

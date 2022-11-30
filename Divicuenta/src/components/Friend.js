@@ -1,10 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View, Text, StyleSheet,  Image , Pressable} from 'react-native'
-
+import { serverUrl } from '../helper'
 
 const Friend = ({
     setFriend,
+    number
 }) => {
+    const [amigos, setAmigos]= useState([]);
+    // let amigos = []
+    fetch(`${serverUrl}/v1/users/300547865/friends`)
+    .then((res) => res.json())
+    .then(resJson => {
+        console.log(resJson.friends)
+        // setRecibes(resJson.friends)
+        setAmigos([...resJson.friends])
+        //amigos = [...resJson.friends]
+    }).catch(e=>{console.log(e)});
+    
+
+
   return (
     <View style={styles.container}>
         <Image
@@ -27,10 +41,13 @@ const Friend = ({
             </Pressable>
 
         </View>
-            <Image
+            {/* <Image
                 style={styles.image}
                 source={require('../img/Desarrollo.png')}
-            />
+            /> */}
+            {amigos.map((d, i)=>{
+                // console.log(d);
+                return (<Text key={i} style={styles.title2}>{d["userName"]}</Text>)})}
     </View>
   )
 }
@@ -47,6 +64,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         bottom: 200,
         zIndex: -1,
+    },
+
+    Text: {
+        color: "000",
     },
 
 
@@ -88,6 +109,29 @@ const styles = StyleSheet.create({
         elevation: 20
 
     },
+    title2: {
+        fontSize: 20,
+        color: '#fff',
+        fontWeight: 'bold',
+        backgroundColor: '#0F0',
+        padding: 10,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        marginHorizontal: '20%',
+        marginVertical: 30,
+        shadowOpacity: 0.51,
+        shadowRadius: 13.16,
+        textAlign: 'center',
+        justifyContent: 'center',
+
+        elevation: 20
+
+    },
+
 
     close: {
         width: 30,
