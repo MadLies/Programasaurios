@@ -1,5 +1,6 @@
 package resources;
 
+import dto.BillRequest;
 import dto.ExtractoDto;
 import dto.FriendDto;
 import dto.FriendTuple;
@@ -9,6 +10,7 @@ import java.time.Clock;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -64,6 +66,13 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response update(UpdateRequest update){
         
+        return Response.accepted().build();
+    }
+    
+    @POST
+    @Path("/{user}/newbill")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response bill(BillRequest bill){
         return Response.accepted().build();
     }
 }

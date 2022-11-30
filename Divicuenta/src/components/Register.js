@@ -16,12 +16,13 @@ setModalRegister,
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [password2, setPassword2] = React.useState('');
+  
 
 
 
 
-   const handleRegister = () => { 
-     if( [name, nickname, country, phone, email, password, password2].some((value)=>value == '')){
+  const handleRegister = (number, name, nickname, country, email, password , password2) => { 
+     if( [name, nickname, country, number, email, password, password2].some((value)=>value == '')){
        Alert.alert(
            'Error', 
           'Todos los campos son obligatorios',
@@ -38,11 +39,38 @@ setModalRegister,
           return
     }
     else{
-      //aqui van muchas cosas de bases de datos
-      setModalRegister(false);
-        return
+      console.log('Registro exitoso')
+      //setModalRegister(false);
+      const user = {
+        "number": number,
+        "name": name,
+        "nickname": nickname,
+        "country": country,
+        "email": email,
+        "password": password
+      }
+      const userAction = async () => {
+        const response = await fetch('https://2e96-186-28-28-42.ngrok.io/v1/register', {
+          method: 'POST',
+          body: JSON.stringify(user),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        
+        const myJson = await response.json();
+        console.log(myJson);
+        console.log("Webos");
+      
     }
+    setModalRegister(false)
+    userAction();
+
+    return 
   }
+
+}
 
   return (
     
@@ -80,9 +108,9 @@ setModalRegister,
                 keyboardType='default'
                 placeholder='Nombre'
                 placeholderTextColor={'#666'}
-                value={name}
+               
                 onChangeText={setName}
-                
+                value={name}
               />
           </View>
 
@@ -115,29 +143,7 @@ setModalRegister,
               />
           </View>
 
-          <View style={styles.form}>
-              <Text style={styles.label}>Divisa</Text>
-              <Picker
-                style={styles.pick}
-                //Meter base de datos manuel perro hpta
-                
-                >
-                    
-                    <Picker.Item label="--Seleccione--" value="" />
-                    <Picker.Item label="MXN" value="MXN" />
-                    <Picker.Item label="USD" value="USD" />
-                    <Picker.Item label="EUR" value="EUR" />
-                    <Picker.Item label="COP" value="COP" />
-                    <Picker.Item label="GBP" value="GBP" />
-                    <Picker.Item label="ARS" value="ARS" />
-                    <Picker.Item label="BRL" value="BRL" />
-                    <Picker.Item label="CLP" value="CLP" />
-                    <Picker.Item label="JPY" value="JPY" />
 
-                </Picker>
-
-          
-          </View>
 
           <View style={styles.form}>
               <Text style={styles.label}>Email</Text>
@@ -173,7 +179,7 @@ setModalRegister,
                 placeholder='Ingresa tu password'
                 placeholderTextColor="#666"
                 returnKeyType='go'
-                secureTextEntry
+               secureTextEntry
                 autoCorrect={false}
                 value={password}
                 onChangeText={setPassword}
@@ -198,7 +204,7 @@ setModalRegister,
 
           <Pressable 
               style={styles.btnSubmit}
-              onPress={handleRegister}
+              onPress={()=>handleRegister(phone, name, nickname, country, email, password, password2)}
           >
               <Text style={styles.btnSubmitText}>
                 Registrar</Text> 
@@ -209,9 +215,6 @@ setModalRegister,
       </ScrollView>
 
     </View>
-
-
-
 
     
 

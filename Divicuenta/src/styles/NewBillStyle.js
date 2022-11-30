@@ -118,7 +118,16 @@ const NewBillStyle = StyleSheet.create({
         marginHorizontal: "25%",
         marginVertical: "5%"
 
-    }
+    },
+    button: {
+        backgroundColor: '#FF9551',
+        borderRadius: 10,
+        padding: 10,
+        alignItems: 'center',
+        marginVertical: 20,
+        marginHorizontal: 20,
+        
+    },
 
 });
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, Pressable, Image } from 'react-native'
 import Dues from './Dues'
+import helper, { generarId } from '../helper'
 const dueList = ({gastos, setGasto , filtro , gastosFiltrados}) => {
     return (
     <View style={styles.container}>
@@ -8,14 +9,14 @@ const dueList = ({gastos, setGasto , filtro , gastosFiltrados}) => {
 
         {filtro? gastosFiltrados.map(gasto => (
                      <Dues
-                        key={gasto.id}
+                        key={generarId()}
                         gasto={gasto}
                         setGasto={setGasto}
                     />
                     
        ) ):gastos.map(gasto => (
                     <Dues
-                        key={gasto.id}
+                        key={generarId()}
                         gasto={gasto}
                         setGasto={setGasto}
                     />      

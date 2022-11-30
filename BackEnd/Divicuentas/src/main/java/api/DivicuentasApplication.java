@@ -5,6 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import resources.LoginResource;
 import resources.RegisterResource;
+import resources.StatisticResource;
 import resources.UserResource;
 //import com.example.helloworld.health.TemplateHealthCheck;
 
@@ -34,9 +35,10 @@ public class DivicuentasApplication extends Application<DivicuentasConfiguration
         final LoginResource login = new LoginResource();
         final UserResource debts = new UserResource();
         final RegisterResource register = new RegisterResource();
-        
+        final StatisticResource statistic = new StatisticResource();
         environment.jersey().register(login);
         environment.jersey().register(debts);
         environment.jersey().register(register);
+        environment.jersey().register(statistic);
     }
 }

@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react'
 import { Text, View, StyleSheet, Pressable, Image } from 'react-native'
-
 import { Picker } from '@react-native-picker/picker'
 
 
@@ -10,14 +9,22 @@ const typeDue = ({
     setFiltro,
     gastos,
     setGastosFiltrados,
+    debs,
+    recibes,
+    gastosFiltrados
 }) => {
   useEffect(() => {
   if(filtro === '') {
-    setGastosFiltrados([])
+    setGastosFiltrados(gastos)
   }else{
-    const gastosFiltrados = gastos.filter(gasto => gasto.type === filtro)
-    setGastosFiltrados(gastosFiltrados)
+    if (filtro === 'Debes') {
+    setGastosFiltrados(debs)
+    console.log(gastosFiltrados)
 }
+if (filtro === 'Recibes') {
+    setGastosFiltrados(recibes)
+    console.log(gastosFiltrados)
+}}
 },[filtro])  
   return (
     <View style={styles.container}>

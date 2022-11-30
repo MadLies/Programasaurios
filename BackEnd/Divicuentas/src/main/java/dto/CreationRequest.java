@@ -24,8 +24,6 @@ public class CreationRequest {
     @JsonProperty
     private String country;
     @JsonProperty
-    private String currency;
-    @JsonProperty
     private String email;
     @JsonProperty
     private String password;

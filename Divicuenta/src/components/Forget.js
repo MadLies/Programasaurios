@@ -3,6 +3,7 @@ import { View, Text, Modal, ScrollView, Pressable, StyleSheet, TextInput, Image,
 import { forgetStyle as styles } from '../styles/ForgetStyle';
 import playRoar from '../functions/PlayRoar';
 
+
 const Forget = ({
     modalForget,
     setModalForget,
@@ -20,6 +21,10 @@ const Forget = ({
 
         }
     }
+
+   
+
+
 
     return (
         <View style={styles.container}>

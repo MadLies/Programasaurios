@@ -20,7 +20,6 @@ public class RegisterResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add (CreationRequest creationInfo){
         System.out.println(creationInfo);
-        
         return Response.accepted().build();
     }
 }

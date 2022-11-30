@@ -12,12 +12,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeopleTuple {
+public class ExpenseDto {
     @JsonProperty
-    private String userId;
-    @JsonProperty
-    private String userName;
-    @JsonProperty
-    private int amount;
+    private int expenses;
     
 }

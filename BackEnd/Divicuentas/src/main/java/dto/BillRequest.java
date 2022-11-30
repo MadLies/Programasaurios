@@ -1,6 +1,7 @@
 package dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,12 +13,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeopleTuple {
+public class BillRequest {
     @JsonProperty
-    private String userId;
+    private String name;
     @JsonProperty
-    private String userName;
+    private String date;
     @JsonProperty
-    private int amount;
-    
+    private int total;
+    @JsonProperty
+    private String divisa;
+    @JsonProperty
+    private List<PeopleTuple> people;
 }
