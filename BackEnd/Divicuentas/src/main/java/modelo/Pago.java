@@ -5,61 +5,82 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
-import javax.persistence.Basic;
+import java.util.List;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
 
 /**
  *
- * @author venus
+ * @author Manuel Martinez
  */
+
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Pago.findAll", query = "SELECT p FROM Pago p"),
-    @NamedQuery(name = "Pago.findByIdPago", query = "SELECT p FROM Pago p WHERE p.idPago = :idPago"),
-    @NamedQuery(name = "Pago.findByFechaPago", query = "SELECT p FROM Pago p WHERE p.fechaPago = :fechaPago")})
-public class Pago implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Table(name = "Pago")
+public class Pago implements Serializable{
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    private Integer idPago;
-    @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date fechaPago;
-    @OneToMany(mappedBy = "idPago", fetch = FetchType.EAGER)
-    private Collection<Transaccion> transaccionCollection;
-    @OneToMany(mappedBy = "idPago", fetch = FetchType.EAGER)
-    private Collection<Notificacion> notificacionCollection;
+    @Column(name = "idPago")
+    int idPago;
+    @Column(name = "idFechaPago")
+    Date fechaPago;
+    
+    @OneToMany(mappedBy = "idTransaccion", cascade = CascadeType.ALL)
+    private List<Transaccion> Transacciones = new ArrayList<>();
+        
+    @OneToMany(mappedBy = "idNotificacion", cascade = CascadeType.ALL)
+    private List<Notificacion> Notificaciones = new ArrayList<>();
 
-    public Pago() {
-    }
-
-    public Pago(Integer idPago) {
-        this.idPago = idPago;
-    }
-
-    public Pago(Integer idPago, Date fechaPago) {
+    public Pago(int idPago, Date fechaPago) {
         this.idPago = idPago;
         this.fechaPago = fechaPago;
     }
 
-    public Integer getIdPago() {
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + this.idPago;
+        hash = 79 * hash + Objects.hashCode(this.fechaPago);
+        hash = 79 * hash + Objects.hashCode(this.Transacciones);
+        hash = 79 * hash + Objects.hashCode(this.Notificaciones);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pago other = (Pago) obj;
+        if (this.idPago != other.idPago) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaPago, other.fechaPago)) {
+            return false;
+        }
+        if (!Objects.equals(this.Transacciones, other.Transacciones)) {
+            return false;
+        }
+        return Objects.equals(this.Notificaciones, other.Notificaciones);
+    }
+
+    public int getIdPago() {
         return idPago;
     }
 
-    public void setIdPago(Integer idPago) {
+    public void setIdPago(int idPago) {
         this.idPago = idPago;
     }
 
@@ -71,45 +92,27 @@ public class Pago implements Serializable {
         this.fechaPago = fechaPago;
     }
 
-    public Collection<Transaccion> getTransaccionCollection() {
-        return transaccionCollection;
+    public List<Transaccion> getTransacciones() {
+        return Transacciones;
     }
 
-    public void setTransaccionCollection(Collection<Transaccion> transaccionCollection) {
-        this.transaccionCollection = transaccionCollection;
+    public void setTransacciones(List<Transaccion> Transacciones) {
+        this.Transacciones = Transacciones;
     }
 
-    public Collection<Notificacion> getNotificacionCollection() {
-        return notificacionCollection;
+    public List<Notificacion> getNotificaciones() {
+        return Notificaciones;
     }
 
-    public void setNotificacionCollection(Collection<Notificacion> notificacionCollection) {
-        this.notificacionCollection = notificacionCollection;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idPago != null ? idPago.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pago)) {
-            return false;
-        }
-        Pago other = (Pago) object;
-        if ((this.idPago == null && other.idPago != null) || (this.idPago != null && !this.idPago.equals(other.idPago))) {
-            return false;
-        }
-        return true;
+    public void setNotificaciones(List<Notificacion> Notificaciones) {
+        this.Notificaciones = Notificaciones;
     }
 
     @Override
     public String toString() {
-        return "divicuentas.Pago[ idPago=" + idPago + " ]";
+        return "Pago{" + "idPago=" + idPago + ", fechaPago=" + fechaPago + ", Transacciones=" + Transacciones + ", Notificaciones=" + Notificaciones + '}';
     }
+    
+    
     
 }

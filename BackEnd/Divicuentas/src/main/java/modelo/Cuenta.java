@@ -5,82 +5,68 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
-import javax.persistence.Basic;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
 
 /**
  *
- * @author venus
+ * @author Manuel Martinez
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Cuenta.findAll", query = "SELECT c FROM Cuenta c"),
-    @NamedQuery(name = "Cuenta.findByIdCuenta", query = "SELECT c FROM Cuenta c WHERE c.idCuenta = :idCuenta"),
-    @NamedQuery(name = "Cuenta.findByNombreCuenta", query = "SELECT c FROM Cuenta c WHERE c.nombreCuenta = :nombreCuenta"),
-    @NamedQuery(name = "Cuenta.findByFechaCuenta", query = "SELECT c FROM Cuenta c WHERE c.fechaCuenta = :fechaCuenta"),
-    @NamedQuery(name = "Cuenta.findByTotalCuenta", query = "SELECT c FROM Cuenta c WHERE c.totalCuenta = :totalCuenta"),
-    @NamedQuery(name = "Cuenta.findByDivisaCuenta", query = "SELECT c FROM Cuenta c WHERE c.divisaCuenta = :divisaCuenta"),
-    @NamedQuery(name = "Cuenta.findByTipoActividad", query = "SELECT c FROM Cuenta c WHERE c.tipoActividad = :tipoActividad")})
-public class Cuenta implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Table(name = "Cuenta")
+public class Cuenta implements Serializable{
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    private Integer idCuenta;
-    @Basic(optional = false)
-    private String nombreCuenta;
-    @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date fechaCuenta;
-    @Basic(optional = false)
-    private float totalCuenta;
-    private String divisaCuenta;
-    private String tipoActividad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuenta", fetch = FetchType.EAGER)
-    private Collection<Integrantecuenta> integrantecuentaCollection;
-    @OneToMany(mappedBy = "idCuenta", fetch = FetchType.EAGER)
-    private Collection<Transaccion> transaccionCollection;
-    @JoinColumn(name = "idGrupo", referencedColumnName = "idGrupo")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Grupo idGrupo;
-    @OneToMany(mappedBy = "idCuenta", fetch = FetchType.EAGER)
-    private Collection<Notificacion> notificacionCollection;
+    @Column(name = "idCuenta")
+    int idCuenta;
+    @Column(name = "nombreCuenta")
+    String nombreCuenta;
+    @Column(name = "fechaCuenta")
+    Date fechaCuenta;
+    @Column(name = "totalCuenta")
+    float totalCuenta;
+    @Column(name = "divisaCuenta")
+    String divisaCuenta;
+    @Column(name = "tipoActividad")
+    String tipoActividad;
+    
+    @OneToMany(mappedBy = "IntegranteCuenta", cascade = CascadeType.ALL)
+    private List<IntegranteCuenta> MisCuentas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "idTransaccion", cascade = CascadeType.ALL)
+    private List<Transaccion> MisGenerados = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "idTransaccion", cascade = CascadeType.ALL)
+    private List<Transaccion> MisRecibidos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "idNotificacion", cascade = CascadeType.ALL)
+    private List<Notificacion> MisNotificaciones = new ArrayList<>();
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "IdGrupo")
+    private Usuario IdGrupo;
 
-    public Cuenta() {
+    @Override
+    public String toString() {
+        return "Cuenta{" + "idCuenta=" + idCuenta + ", nombreCuenta=" + nombreCuenta + ", fechaCuenta=" + fechaCuenta + ", totalCuenta=" + totalCuenta + ", divisaCuenta=" + divisaCuenta + ", tipoActividad=" + tipoActividad + ", IdGrupo=" + IdGrupo + '}';
     }
 
-    public Cuenta(Integer idCuenta) {
-        this.idCuenta = idCuenta;
-    }
-
-    public Cuenta(Integer idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta) {
-        this.idCuenta = idCuenta;
-        this.nombreCuenta = nombreCuenta;
-        this.fechaCuenta = fechaCuenta;
-        this.totalCuenta = totalCuenta;
-    }
-
-    public Integer getIdCuenta() {
+    public int getIdCuenta() {
         return idCuenta;
     }
 
-    public void setIdCuenta(Integer idCuenta) {
+    public void setIdCuenta(int idCuenta) {
         this.idCuenta = idCuenta;
     }
 
@@ -124,61 +110,88 @@ public class Cuenta implements Serializable {
         this.tipoActividad = tipoActividad;
     }
 
-    public Collection<Integrantecuenta> getIntegrantecuentaCollection() {
-        return integrantecuentaCollection;
+    public Usuario getIdGrupo() {
+        return IdGrupo;
     }
 
-    public void setIntegrantecuentaCollection(Collection<Integrantecuenta> integrantecuentaCollection) {
-        this.integrantecuentaCollection = integrantecuentaCollection;
-    }
-
-    public Collection<Transaccion> getTransaccionCollection() {
-        return transaccionCollection;
-    }
-
-    public void setTransaccionCollection(Collection<Transaccion> transaccionCollection) {
-        this.transaccionCollection = transaccionCollection;
-    }
-
-    public Grupo getIdGrupo() {
-        return idGrupo;
-    }
-
-    public void setIdGrupo(Grupo idGrupo) {
-        this.idGrupo = idGrupo;
-    }
-
-    public Collection<Notificacion> getNotificacionCollection() {
-        return notificacionCollection;
-    }
-
-    public void setNotificacionCollection(Collection<Notificacion> notificacionCollection) {
-        this.notificacionCollection = notificacionCollection;
+    public void setIdGrupo(Usuario IdGrupo) {
+        this.IdGrupo = IdGrupo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idCuenta != null ? idCuenta.hashCode() : 0);
+        int hash = 3;
+        hash = 23 * hash + this.idCuenta;
+        hash = 23 * hash + Objects.hashCode(this.nombreCuenta);
+        hash = 23 * hash + Objects.hashCode(this.fechaCuenta);
+        hash = 23 * hash + Float.floatToIntBits(this.totalCuenta);
+        hash = 23 * hash + Objects.hashCode(this.divisaCuenta);
+        hash = 23 * hash + Objects.hashCode(this.tipoActividad);
+        hash = 23 * hash + Objects.hashCode(this.MisCuentas);
+        hash = 23 * hash + Objects.hashCode(this.MisGenerados);
+        hash = 23 * hash + Objects.hashCode(this.MisRecibidos);
+        hash = 23 * hash + Objects.hashCode(this.MisNotificaciones);
+        hash = 23 * hash + Objects.hashCode(this.IdGrupo);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cuenta)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Cuenta other = (Cuenta) object;
-        if ((this.idCuenta == null && other.idCuenta != null) || (this.idCuenta != null && !this.idCuenta.equals(other.idCuenta))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Cuenta other = (Cuenta) obj;
+        if (this.idCuenta != other.idCuenta) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.totalCuenta) != Float.floatToIntBits(other.totalCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombreCuenta, other.nombreCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.divisaCuenta, other.divisaCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoActividad, other.tipoActividad)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaCuenta, other.fechaCuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisCuentas, other.MisCuentas)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisGenerados, other.MisGenerados)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisRecibidos, other.MisRecibidos)) {
+            return false;
+        }
+        if (!Objects.equals(this.MisNotificaciones, other.MisNotificaciones)) {
+            return false;
+        }
+        return Objects.equals(this.IdGrupo, other.IdGrupo);
     }
 
-    @Override
-    public String toString() {
-        return "divicuentas.Cuenta[ idCuenta=" + idCuenta + " ]";
+    public Cuenta(int idCuenta, String nombreCuenta, Date fechaCuenta, float totalCuenta, String divisaCuenta, String tipoActividad, Usuario IdGrupo) {
+        this.idCuenta = idCuenta;
+        this.nombreCuenta = nombreCuenta;
+        this.fechaCuenta = fechaCuenta;
+        this.totalCuenta = totalCuenta;
+        this.divisaCuenta = divisaCuenta;
+        this.tipoActividad = tipoActividad;
+        this.IdGrupo = IdGrupo;
     }
+
+    
+    
+    
     
 }

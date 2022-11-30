@@ -5,65 +5,60 @@
 package modelo;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
- * @author venus
+ * @author Manuel Martinez
  */
-@Entity
-@NamedQueries({
-    @NamedQuery(name = "Transaccion.findAll", query = "SELECT t FROM Transaccion t"),
-    @NamedQuery(name = "Transaccion.findByIdTransaccion", query = "SELECT t FROM Transaccion t WHERE t.idTransaccion = :idTransaccion"),
-    @NamedQuery(name = "Transaccion.findByValorTransaccion", query = "SELECT t FROM Transaccion t WHERE t.valorTransaccion = :valorTransaccion")})
-public class Transaccion implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+@Entity
+@Table(name = "Transaccion")
+public class Transaccion implements Serializable{
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    private Integer idTransaccion;
-    @Basic(optional = false)
-    private int valorTransaccion;
-    @JoinColumn(name = "idCuenta", referencedColumnName = "idCuenta")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Cuenta idCuenta;
-    @JoinColumn(name = "idPago", referencedColumnName = "idPago")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Pago idPago;
-    @JoinColumn(name = "usuarioSalida", referencedColumnName = "celular")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Usuario usuarioSalida;
-    @JoinColumn(name = "usuarioLlegada", referencedColumnName = "celular")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @Column(name = "idTransaccion")
+    int idTransaccion;
+    
+    @Column(name = "valorTransaccion")
+    int valorTransaccion; 
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idCuenta")
+    private Cuenta cuenta;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idPago")
+    private Pago pago;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "celular")
+    private Usuario UsuarioSalida;
+    
     private Usuario usuarioLlegada;
 
-    public Transaccion() {
-    }
-
-    public Transaccion(Integer idTransaccion) {
-        this.idTransaccion = idTransaccion;
-    }
-
-    public Transaccion(Integer idTransaccion, int valorTransaccion) {
+    public Transaccion(int idTransaccion, int valorTransaccion, Cuenta cuenta, Pago pago, Usuario UsuarioSalida, Usuario usuarioLlegada) {
         this.idTransaccion = idTransaccion;
         this.valorTransaccion = valorTransaccion;
+        this.cuenta = cuenta;
+        this.pago = pago;
+        this.UsuarioSalida = UsuarioSalida;
+        this.usuarioLlegada = usuarioLlegada;
     }
 
-    public Integer getIdTransaccion() {
+    public int getIdTransaccion() {
         return idTransaccion;
     }
 
-    public void setIdTransaccion(Integer idTransaccion) {
+    public void setIdTransaccion(int idTransaccion) {
         this.idTransaccion = idTransaccion;
     }
 
@@ -75,28 +70,28 @@ public class Transaccion implements Serializable {
         this.valorTransaccion = valorTransaccion;
     }
 
-    public Cuenta getIdCuenta() {
-        return idCuenta;
+    public Cuenta getCuenta() {
+        return cuenta;
     }
 
-    public void setIdCuenta(Cuenta idCuenta) {
-        this.idCuenta = idCuenta;
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
     }
 
-    public Pago getIdPago() {
-        return idPago;
+    public Pago getPago() {
+        return pago;
     }
 
-    public void setIdPago(Pago idPago) {
-        this.idPago = idPago;
+    public void setPago(Pago pago) {
+        this.pago = pago;
     }
 
     public Usuario getUsuarioSalida() {
-        return usuarioSalida;
+        return UsuarioSalida;
     }
 
-    public void setUsuarioSalida(Usuario usuarioSalida) {
-        this.usuarioSalida = usuarioSalida;
+    public void setUsuarioSalida(Usuario UsuarioSalida) {
+        this.UsuarioSalida = UsuarioSalida;
     }
 
     public Usuario getUsuarioLlegada() {
@@ -108,28 +103,53 @@ public class Transaccion implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Transaccion{" + "idTransaccion=" + idTransaccion + ", valorTransaccion=" + valorTransaccion + ", cuenta=" + cuenta + ", pago=" + pago + ", UsuarioSalida=" + UsuarioSalida + ", usuarioLlegada=" + usuarioLlegada + '}';
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (idTransaccion != null ? idTransaccion.hashCode() : 0);
+        int hash = 7;
+        hash = 83 * hash + this.idTransaccion;
+        hash = 83 * hash + this.valorTransaccion;
+        hash = 83 * hash + Objects.hashCode(this.cuenta);
+        hash = 83 * hash + Objects.hashCode(this.pago);
+        hash = 83 * hash + Objects.hashCode(this.UsuarioSalida);
+        hash = 83 * hash + Objects.hashCode(this.usuarioLlegada);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Transaccion)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Transaccion other = (Transaccion) object;
-        if ((this.idTransaccion == null && other.idTransaccion != null) || (this.idTransaccion != null && !this.idTransaccion.equals(other.idTransaccion))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Transaccion other = (Transaccion) obj;
+        if (this.idTransaccion != other.idTransaccion) {
+            return false;
+        }
+        if (this.valorTransaccion != other.valorTransaccion) {
+            return false;
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
+            return false;
+        }
+        if (!Objects.equals(this.pago, other.pago)) {
+            return false;
+        }
+        if (!Objects.equals(this.UsuarioSalida, other.UsuarioSalida)) {
+            return false;
+        }
+        return Objects.equals(this.usuarioLlegada, other.usuarioLlegada);
     }
-
-    @Override
-    public String toString() {
-        return "divicuentas.Transaccion[ idTransaccion=" + idTransaccion + " ]";
-    }
+    
+    
+    
     
 }
