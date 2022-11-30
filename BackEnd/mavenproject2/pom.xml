@@ -48,5 +48,5 @@
             </plugin>
         </plugins>
     </build>
-    
+    <name>ConexionMysqlDivicuentas</name>
 </project>
