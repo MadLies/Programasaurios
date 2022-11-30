@@ -1,6 +1,7 @@
 
 package resources;
 
+import Querys.Admin;
 import com.codahale.metrics.annotation.Timed;
 import dto.LoginDto;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import modelo.Usuario;
 
 /**
  *
@@ -28,7 +30,11 @@ public class LoginResource {
     @Timed
     @Path("/{user}")
     public LoginDto login(@PathParam("user") String user){ 
-        return new LoginDto("1234567890", "rawr");
+        /*Admin login = new Admin();
+        double number = Double.parseDouble(user);
+        Usuario usuario = login.FindUsuario(number);
+        return new LoginDto(Double.toString(usuario.getId()), usuario.getContrasena());*/
+        return new LoginDto("3002050291", "rawr");
     }
     
 }

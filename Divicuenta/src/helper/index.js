@@ -21,4 +21,4 @@ export const formatearFecha = (fecha) => {
     
 }
 
-export const serverUrl = 'https://94dd-186-28-28-42.ngrok.io';
+export const serverUrl = 'https://04a5-186-31-218-187.ngrok.io';

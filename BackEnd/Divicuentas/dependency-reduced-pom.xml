@@ -79,7 +79,7 @@
   </dependencies>
   <properties>
     <maven.compiler.target>16</maven.compiler.target>
-    <exec.mainClass>divicuentas.Prueba2</exec.mainClass>
+    <exec.mainClass>api.DivicuentasApplication</exec.mainClass>
     <dropwizard.version>2.1.4</dropwizard.version>
     <maven.compiler.source>16</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

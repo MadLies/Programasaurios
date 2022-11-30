@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -20,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "UsuarioDelGrupo")
+@NoArgsConstructor
 public class UsuarioDelGrupo implements Serializable {
         
     @Id 

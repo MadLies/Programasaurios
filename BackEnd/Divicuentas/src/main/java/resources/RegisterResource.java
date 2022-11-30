@@ -1,5 +1,6 @@
 package resources;
 
+import Querys.Admin;
 import dto.CreationRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -20,6 +21,15 @@ public class RegisterResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add (CreationRequest creationInfo){
         System.out.println(creationInfo);
+        //Admin create = new Admin();
+        /*create.GenerarUusario(Double.parseDouble(creationInfo.getNumber()), 
+                creationInfo.getName(), 
+                creationInfo.getNickname(), 
+                creationInfo.getCountry(), 
+                "COP", 
+                creationInfo.getEmail(),
+                creationInfo.getPassword());*/
+        //create.GenerarUusario(300570114, "Kevin", "kev", "Peru", "COP", "kevin@gmail.com", "uwu");
         return Response.accepted().build();
     }
 }

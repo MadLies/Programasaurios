@@ -29,34 +29,34 @@ public class UserResource {
     @GET
     @Path("/{user}/debts")
     public ExtractoDto debts(@PathParam("user") String user){
-        PeopleTuple persona = new PeopleTuple("3005701146", "Trucha", 50000);
-        PeopleTuple persona1 = new PeopleTuple("3005701147", "Mano", 50000);
-        PeopleTuple persona2 = new PeopleTuple("3005701148", "Pooh", 50000);
-        PeopleTuple persona3 = new PeopleTuple("3005701149", "Rosita", 50000);
+        PeopleTuple persona = new PeopleTuple("3005701146", "Manuel", 5000);
+        PeopleTuple persona1 = new PeopleTuple("3005701147", "Venus", 2000);
+        PeopleTuple persona2 = new PeopleTuple("3005701148", "Sergio", 30000);
+        PeopleTuple persona3 = new PeopleTuple("3005701149", "Brayan", 12000);
         List<PeopleTuple> personas = List.of(persona, persona1, persona2, persona3);
         System.out.println(user);
-        return new ExtractoDto(personas, 200000, "Deben");
+        return new ExtractoDto(personas, 49000, "Deben");
     }
     
     @GET
     @Path("/{user}/receive")
     public ExtractoDto receive(@PathParam("user") String user){
-        PeopleTuple persona = new PeopleTuple("3005701146", "Trucha", 50000);
-        PeopleTuple persona1 = new PeopleTuple("3005701147", "Mano", 50000);
-        PeopleTuple persona2 = new PeopleTuple("3005701148", "Pooh", 50000);
-        PeopleTuple persona3 = new PeopleTuple("3005701149", "Wilchitos", 50000);
+        PeopleTuple persona = new PeopleTuple("3005701156", "Sebastian", 500);
+        PeopleTuple persona1 = new PeopleTuple("3005701157", "David", 5200);
+        PeopleTuple persona2 = new PeopleTuple("3005701158", "Esteban", 70000);
+        PeopleTuple persona3 = new PeopleTuple("3005701159", "Cristhian", 100000);
         List<PeopleTuple> personas = List.of(persona, persona1, persona2, persona3);
         System.out.println(user);
-        return new ExtractoDto(personas, 200000, "Cobrar");
+        return new ExtractoDto(personas, 175700, "Cobrar");
     }
     
     @GET
     @Path("/{user}/friends")
     public FriendDto friend(@PathParam("user") String user){
-        FriendTuple amigo = new FriendTuple("3005701146", "Trucha", false );
-        FriendTuple amigo1 = new FriendTuple("3005701146", "Mano", true );
-        FriendTuple amigo2 = new FriendTuple("3005701146", "Pooh", false );
-        FriendTuple amigo3 = new FriendTuple("3005701146", "Rosita", false );
+        FriendTuple amigo = new FriendTuple("3005701147", "Venus", true );
+        FriendTuple amigo1 = new FriendTuple("3005701146", "Manuel", true );
+        FriendTuple amigo2 = new FriendTuple("3005701246", "Grasa", false );
+        FriendTuple amigo3 = new FriendTuple("3005704146", "Molina", false );
         List<FriendTuple> amigos = List.of(amigo, amigo1, amigo2, amigo3);
         return new FriendDto(amigos);
     }  

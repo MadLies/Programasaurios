@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -29,6 +30,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "Usuario")
+@NoArgsConstructor
 public class Usuario implements Serializable {
 
     private static final long serialVersion = 1L;

@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -22,6 +23,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Grupo")
+@NoArgsConstructor
 public class Grupo implements Serializable{
     
     @Id
