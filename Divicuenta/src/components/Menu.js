@@ -9,6 +9,7 @@ import Stats from './Stats';
 import Due from './Due';
 import Friend from './Friend';
 import { serverUrl } from '../helper';
+import Notification from './Notification';
 
 const Menu = ({
     modalLogin,
@@ -25,6 +26,7 @@ const Menu = ({
     const [friend, setFriend] = useState(false)
     const [debs,setDebs ] = useState([])
     const [recibes,setRecibes ] = useState([])
+    const [notification, setNotification] = useState(false)
 
 
     const viewDebs = () => {
@@ -115,7 +117,7 @@ const Menu = ({
 
                 <Pressable
                     style={[styles.button, styles.btnNoti]}
-                    onPress={() => setModalLogin(false)}
+                    onPress={() => setNotification(true)}
                 >
                     <Image
                         style={styles.image}
@@ -168,6 +170,20 @@ const Menu = ({
             </View>
 
 
+
+            <Modal
+                animationType='slide'
+                visible = {notification}
+                onRequestClose={()=>{
+                    setNotification(false)
+                }}
+                >
+
+                    <Notification
+                        setConfiguration={setConfiguration}
+                    
+                    />
+                </Modal>
             <NewBill
                 newBill={newBill}
                 bill={bill}
