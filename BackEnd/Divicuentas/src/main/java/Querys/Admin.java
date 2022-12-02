@@ -4,7 +4,10 @@
  */
 package Querys;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -92,7 +95,7 @@ public class Admin {
 
     }
 
-    public Pago FindIntegrantePago(int key) {
+    public Pago FindPago(int key) {
 
         Pago yo = manager.find(Pago.class, key);
         return yo;
@@ -376,5 +379,104 @@ public class Admin {
         }
 
     }
+    
+    public void AgregarAmigo(double key, double keyAmigo){
+       
+       Usuario OtroUsuario = FindUsuario(keyAmigo);
+       Usuario user = FindUsuario(key);
+       Amigo amig = new Amigo(OtroUsuario.getId(), 1, user,OtroUsuario);
+        InsertarObjeto(amig);
+       
+    }
+    
+    public void CrearGrupo(int id, String nombre, String Descripcion){
+        
+        Grupo grupo = new Grupo(id, nombre, Descripcion);
+        InsertarObjeto(grupo);
+        
+    }
+    
+    public void InsertarUsuarioToGrupo(int keyGrupo, double keyUsuario, int id){
+        
+        Usuario user = FindUsuario(keyUsuario);
+        Grupo grupo = FindcGrupo(keyGrupo);
+        
+        UsuarioDelGrupo conexion = new UsuarioDelGrupo(id, user, grupo);
+        
+        InsertarObjeto(conexion);
+        
+        
+    }
+    
+    public void InsertarCuenta(int id, String nombreCuenta, float totalCuenta, String divisaCuenta, String TipoActividad, int id_grupo){
+        
+        LocalDate myObj = LocalDate.now();
+        Date fecha = new Date();
+        
+       
+        fecha.setMonth(myObj.getMonthValue());
+        fecha.setYear(myObj.getYear());
+        fecha.setDate(myObj.getDayOfYear());
+        
+        Grupo grupo = FindcGrupo(id_grupo);
+       
+        Cuenta cuentica = new Cuenta(id, nombreCuenta, fecha, totalCuenta, divisaCuenta,TipoActividad, grupo);
+        
+        InsertarObjeto(cuentica);
+    
+    }
+    
+    public void InsertarCuentaUsuario(int id_cuenta, int idUsuario, int Id_relacionCuentaUsuario, int abono){
+       
+        Cuenta cuenta = FindcCuenta(id_cuenta);
+        Usuario usuario = FindUsuario(idUsuario);
+        
+        IntegranteCuenta integrante = new IntegranteCuenta(Id_relacionCuentaUsuario, cuenta, usuario, abono);
+        InsertarObjeto(integrante);
+
+    }
+    
+    public void InserPago(int id){
+        
+        
+        LocalDate myObj = LocalDate.now();
+        Date fecha = new Date();
+        
+       
+        fecha.setMonth(myObj.getMonthValue());
+        fecha.setYear(myObj.getYear());
+        fecha.setDate(myObj.getDayOfYear());
+        
+        
+        Pago pago = new Pago(id,fecha);
+        InsertarObjeto(pago);
+    }
+    
+    public void InsetarTransaccion(int id_Transaccion, int id_cuenta, int id_pago, int ValorTransaccion, double id_usuario1, double id_usuario2){
+        
+        Cuenta cuenta = FindcCuenta(id_cuenta);
+        Pago pago = FindPago(id_pago);
+        
+        Usuario usuario1 = FindUsuario(id_usuario1);
+        Usuario usuario2 = FindUsuario(id_usuario2);
+        
+        Transaccion transaccion = new Transaccion(id_Transaccion, ValorTransaccion, cuenta, pago, usuario2, usuario2);
+        InsertarObjeto(transaccion);
+        
+    }
+    
+     public void InsetarNotificacion(int id_Notificacion,int id_cuenta, String mensaje, String estado, int id_pago, int ValorTransaccion, double id_usuario1, double id_usuario2){
+        
+        Cuenta cuenta = FindcCuenta(id_cuenta);
+        Pago pago = FindPago(id_pago);
+        
+        Usuario usuario1 = FindUsuario(id_usuario1);
+        Usuario usuario2 = FindUsuario(id_usuario2);
+        
+        Notificacion notificacion = new Notificacion(id_Notificacion, cuenta, pago, usuario2, usuario2, estado, mensaje);
+        InsertarObjeto(notificacion);
+        
+    }
+    
 
 }
